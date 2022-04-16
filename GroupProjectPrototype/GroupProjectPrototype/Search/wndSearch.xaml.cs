@@ -25,7 +25,8 @@ namespace GroupProjectPrototype
         /// <summary>
         /// Variable to fulfill the requirement: Search window should have a comment about when the invoice is selected, the Invoice ID is saved in a local variable that the main window can access.
         /// </summary>
-        string SelectedID;
+        /// From Mario - I made this public to access
+        public string SelectedID;
 
         /// <summary>
         /// Make a logic object to run queries through

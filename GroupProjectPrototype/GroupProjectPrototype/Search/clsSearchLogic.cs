@@ -49,7 +49,7 @@ namespace GroupProjectPrototype
                 /// <summary>
                 /// Item Manager object that holds the database variable
                 /// </summary>
-                clsItemManager db = new clsItemManager();
+                clsDataAccess db = new clsDataAccess(); ;
 
                 // Select all items in this invoice ID in a query
                 string sql = searchSQL.Filter(invoiceID, totalCost, sellDate);
@@ -66,11 +66,11 @@ namespace GroupProjectPrototype
                     /// </summary>
                     clsScaryThing Invoice = new clsScaryThing();
 
-                    Invoice.invoiceID = int.Parse(ds.Tables[0].Rows[i][0].ToString());
-                    Invoice.cost = Double.Parse(ds.Tables[0].Rows[i]["total_cost"].ToString());
-                    Invoice.sellDate = DateTime.Parse(ds.Tables[0].Rows[i]["sell_date"].ToString());
+                    //Invoice.invoiceID = int.Parse(ds.Tables[0].Rows[i][0].ToString());
+                   // Invoice.cost = Double.Parse(ds.Tables[0].Rows[i]["total_cost"].ToString());
+                   // Invoice.sellDate = DateTime.Parse(ds.Tables[0].Rows[i]["sell_date"].ToString());
 
-                    boxScary.bigBox.Add(Invoice);
+                    //boxScary.bigBox.Add(Invoice);
                 }
 
                 return boxScary;

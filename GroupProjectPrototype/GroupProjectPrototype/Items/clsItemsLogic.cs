@@ -25,7 +25,7 @@ namespace GroupProjectPrototype
         /// <summary>
         /// clsItemManager object to access the methods used to manipulate the database
         /// </summary>
-        clsItemManager itemManage;
+        clsDataAccess itemManage;
 
         /// <summary>
         /// dataset to hold value returned from the executesqlquery method under the clsItemManager class.
@@ -43,7 +43,7 @@ namespace GroupProjectPrototype
             {
                 this.ItemID = ItemID;
                 itemSQL = new clsItemsSQL();
-                itemManage = new clsItemManager();
+                itemManage = new clsDataAccess();
                 ds = new DataSet();
             }
             catch (Exception ex)

@@ -13,7 +13,7 @@ namespace GroupProjectPrototype.Search
         /// <summary>
         /// Item Manager object that holds the database variable
         /// </summary>
-        clsItemManager db = new clsItemManager();
+        clsDataAccess db = new clsDataAccess();
 
         /// <summary>
         /// holds the id of the item we are looking at.
