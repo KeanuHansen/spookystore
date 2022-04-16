@@ -52,6 +52,12 @@ namespace GroupProjectPrototype
         {
             try
             {
+                // Redo this, but make it so it can do one of many queries.
+
+                // Have three query / four query options, based on the selection.
+
+                // Append the clsInvoiceList to the datagrid
+
                 /// <summary>
                 /// Make a string to hold the Invoice_ID for the filter function.
                 /// </summary>
@@ -108,6 +114,11 @@ namespace GroupProjectPrototype
         {
             try
             {
+                // Clear all the items in the datagrid
+
+                // Clear all the search values
+
+                // Set the ID to null
 
             }
             catch (Exception ex)
@@ -154,32 +165,6 @@ namespace GroupProjectPrototype
 
                 // Main Window deals with the data extraction
                 this.Close();
-            }
-            catch (Exception ex)
-            {
-                // Handle the error in top level method calls.
-                System.IO.File.AppendAllText("C:\\HandleError.txt",
-                    Environment.NewLine + "HandleError Exception " +
-                        ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// Return to the main window, but under the pretense of editing.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void editButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                // Create the wndItems variable.
-                EditWindow wndItems = new EditWindow();
-
-                // Go to the wndItems page.
-                this.Hide();
-                wndItems.ShowDialog();
-                this.Show();
             }
             catch (Exception ex)
             {
