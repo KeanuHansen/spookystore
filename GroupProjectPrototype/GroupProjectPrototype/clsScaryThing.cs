@@ -14,7 +14,7 @@ namespace GroupProjectPrototype
 		public string itemID { get; set; }
 		public string item { get; set; }
 		public DateTime sellDate { get; set; }
-		public string cost { get; set; } // is this total cost or cost of singular item? 
+		public string cost { get; set; } // cost of singular item? 
 		public string description { get; set; }
         
 		/// <summary>

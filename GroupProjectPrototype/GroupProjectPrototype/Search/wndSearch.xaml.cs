@@ -128,17 +128,8 @@ namespace GroupProjectPrototype
         {
             try
             {
-                // PASSING DATA: Get the data from the selected item in the DataGrid. It is passed into the SelectedItem variable.
-                // Not needed for this part though, just need to plan it, if I understand the instructions.
-
-                // Create the wndMain variable.
-                // PASSING DATA: Pass the selected invoice into the constructor, as it should have a constructor for specific invoices.
-                MainWindow wndMain = new MainWindow();
-
-                // Go to the wndMain page.
-                this.Hide();
-                wndMain.ShowDialog();
-                this.Show();
+                // Main Window deals with the data extraction
+                this.Close();
             }
             catch (Exception ex)
             {
@@ -158,13 +149,11 @@ namespace GroupProjectPrototype
         {
             try
             {
-                // Create the wndMain variable.
-                MainWindow wndMain = new MainWindow();
+                // Set this to null, as they are pushing cancel
+                SelectedID = null;
 
-                // Go to the wndMain page.
-                this.Hide();
-                wndMain.ShowDialog();
-                this.Show();
+                // Main Window deals with the data extraction
+                this.Close();
             }
             catch (Exception ex)
             {
