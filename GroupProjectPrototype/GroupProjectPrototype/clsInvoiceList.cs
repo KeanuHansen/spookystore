@@ -13,7 +13,5 @@ namespace GroupProjectPrototype
         /// </summary>
         public List<clsInvoice> invoiceList { get; set; }
 
-
-
     }
 }

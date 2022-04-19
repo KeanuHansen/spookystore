@@ -117,17 +117,25 @@ namespace GroupProjectPrototype
         /// </summary>
         public override string ToString()
         {
-            if(stringType == "sell")
+            try
             {
-                return this.selDate;
-            }
+                if (stringType == "sell")
+                {
+                    return this.selDate;
+                }
 
-            if(stringType == "cost")
+                if (stringType == "cost")
+                {
+                    return this.totalCost;
+                }
+
+                return this.invoiceID;
+            }
+            catch (Exception ex)
             {
-                return this.totalCost;
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
-
-            return this.invoiceID;
         }
     }
 }
