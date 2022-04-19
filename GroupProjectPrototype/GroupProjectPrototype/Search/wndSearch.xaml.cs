@@ -41,6 +41,12 @@ namespace GroupProjectPrototype
             // PASSING DATA: Refresh the invoices, do this by having constructors that take data and running the query through that.
 
             InitializeComponent();
+
+            // Add the Invoice ID's to the page.
+            invoiceNum.ItemsSource = objectSQL.GetInvoices();
+
+            // Add the Invoice Total Cost's
+            invoiceTotalCharge.ItemsSource = objectSQL.GetTotalCost();
         }
 
         /// <summary>
@@ -94,7 +100,30 @@ namespace GroupProjectPrototype
                 var list = objectSQL.Filter(invoiceID, totalCost, sellDate);
 
                 // Append the list to the data grid.
+                ItemDatagrid.ItemsSource = list;
 
+                // Create 4 Columns to be displayed in the Datagrid
+                DataGridTextColumn column1 = new DataGridTextColumn();
+                DataGridTextColumn column2 = new DataGridTextColumn();
+                DataGridTextColumn column3 = new DataGridTextColumn();
+
+                // Set the properties of the columns
+                column1.Header = "Invoice ID";
+                column1.Binding = new Binding("InvoiceID");
+
+                column2.Header = "Total Cost";
+                column2.Binding = new Binding("TotalCost");
+
+                column3.Header = "Sell Date";
+                column3.Binding = new Binding("SellDate");
+
+                // Add the columns to the datagrid
+                ItemDatagrid.Columns.Add(column1);
+                ItemDatagrid.Columns.Add(column2);
+                ItemDatagrid.Columns.Add(column3);
+
+                // Don't generate columns automatically
+                ItemDatagrid.AutoGenerateColumns = false;
             }
             catch (Exception ex)
             {
@@ -185,7 +214,8 @@ namespace GroupProjectPrototype
             try
             {
                 // Change the option to the SelectedID up top.
-
+                var item = ((clsInvoice)ItemDatagrid.SelectedItem);
+                SelectedID = item.InvoiceID;
             }
             catch (Exception ex)
             {
