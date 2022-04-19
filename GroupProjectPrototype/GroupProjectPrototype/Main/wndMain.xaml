@@ -6,33 +6,33 @@
         xmlns:local="clr-namespace:GroupProjectPrototype"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Canvas>
-        <Label Content="Cursed Item Shop" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Menu Name="businessMenu" Height="22" Canvas.Left="119" Canvas.Top="15" Width="518">
-            <MenuItem x:Name="UpdateItems" Header="_Update Items" Click="UpdateItems_Click"/>
-            <MenuItem x:Name="Search" Header="_Search Invoice" Click="Search_Click"/>
+    <Canvas Background="#FFC19765">
+        <Label Content="Cursed Item Shop" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontFamily="Viner Hand ITC" BorderBrush="White"/>
+        <Menu Name="businessMenu" Height="22" Canvas.Left="119" Canvas.Top="15" Width="518" Background="#FFFFE2C0">
+            <MenuItem x:Name="UpdateItems" Header="_Update Items" Click="UpdateItems_Click" FontFamily="Viner Hand ITC"/>
+            <MenuItem x:Name="Search" Header="_Search Invoice" Click="Search_Click" FontFamily="Viner Hand ITC"/>
         </Menu>
-        <Button Name="createBtn" Content="Create Invoice" Canvas.Left="119" Canvas.Top="83" Width="85" Click="createBtn_Click"/>
-        <Button Name="deleteBtn" Content="Delete Invoice" Canvas.Left="516" Canvas.Top="83" Width="101" Click="deleteBtn_Click"/>
-        <Button Name="editBtn" Content="Edit Invoice" Canvas.Left="326" Canvas.Top="83" Width="74" Click="editBtn_Click"/>
+        <Button Name="createBtn" Content="Create Invoice" Canvas.Left="119" Canvas.Top="83" Width="85" Click="createBtn_Click" Background="#FFA86130" FontFamily="Viner Hand ITC"/>
+        <Button Name="deleteBtn" Content="Delete Invoice" Canvas.Left="516" Canvas.Top="83" Width="101" Click="deleteBtn_Click" Background="#FFA86130" FontFamily="Viner Hand ITC"/>
+        <Button Name="editBtn" Content="Edit Invoice" Canvas.Left="326" Canvas.Top="83" Width="74" Click="editBtn_Click" Background="#FFA86130" FontFamily="Viner Hand ITC"/>
 
         <Canvas Name="itemsManager" Height="284" Canvas.Left="65" Canvas.Top="121" Width="572" Visibility="Visible">
-            <DataGrid Name="invoiceDG" Height="117" Canvas.Left="20" Canvas.Top="25" Width="532"/>
-            <DatePicker Name="selectedDate" Canvas.Left="50" Canvas.Top="245"/>
-            <Label Content="View Item: " HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="31" Canvas.Top="150"/>
-            <Label Content="Number of Items:" Canvas.Left="427" Canvas.Top="212"/>
-            <Label Content="" Name="numItemsLbl" Canvas.Left="535" Canvas.Top="212"/>
-            <Label Content="Total Cost:" Canvas.Left="466" Canvas.Top="186"/>
-            <Label Content="" Name="costLbl" Canvas.Left="535" Canvas.Top="186"/>
-            <Button Content="Add Item" Name="addItemBtn" Canvas.Left="359" Canvas.Top="153" Width="76" Click="addItemBtn_Click"/>
-            <ComboBox Name="cbitemList" Canvas.Left="100" Canvas.Top="153" Width="120" SelectionChanged="cbitemList_SelectionChanged"/>
-            <Button Name="SaveInvoice" Content="Save Invoice" Canvas.Left="227" Canvas.Top="245" Width="84" Click="SaveInvoice_Click"/>
+            <DataGrid Name="invoiceDG" Height="117" Canvas.Left="20" Canvas.Top="25" Width="532" FontFamily="Viner Hand ITC"/>
+            <DatePicker Name="selectedDate" Canvas.Left="50" Canvas.Top="245" FontFamily="Viner Hand ITC"/>
+            <Label Content="View Item: " HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="31" Canvas.Top="150" FontFamily="Viner Hand ITC"/>
+            <Label Content="Number of Items:" Canvas.Left="427" Canvas.Top="212" FontFamily="Viner Hand ITC"/>
+            <Label Content="" Name="numItemsLbl" Canvas.Left="535" Canvas.Top="212" FontFamily="Viner Hand ITC"/>
+            <Label Content="Total Cost:" Canvas.Left="466" Canvas.Top="186" FontFamily="Viner Hand ITC"/>
+            <Label Content="" Name="costLbl" Canvas.Left="535" Canvas.Top="186" FontFamily="Viner Hand ITC"/>
+            <Button Content="Add Item" Name="addItemBtn" Canvas.Left="359" Canvas.Top="153" Width="76" Click="addItemBtn_Click" Background="#FFA86130" FontFamily="Viner Hand ITC"/>
+            <ComboBox Name="cbitemList" Canvas.Left="100" Canvas.Top="153" Width="120" SelectionChanged="cbitemList_SelectionChanged" FontFamily="Viner Hand ITC"/>
+            <Button Name="SaveInvoice" Content="Save Invoice" Canvas.Left="227" Canvas.Top="245" Width="84" Click="SaveInvoice_Click" Background="#FFA86130" FontFamily="Viner Hand ITC"/>
             <TextBox Name="itemCost" Height="23" Canvas.Left="238" TextWrapping="Wrap" Text="" Canvas.Top="153" Width="62" IsReadOnly="True"/>
-            <Button Name="DeleteBtn" Content="Delete Item" Canvas.Left="455" Canvas.Top="153" Width="75" Click="DeleteBtn_Click"/>
+            <Button Name="DeleteBtn" Content="Delete Item" Canvas.Left="455" Canvas.Top="153" Width="75" Click="DeleteBtn_Click" Background="#FFA86130" FontFamily="Viner Hand ITC"/>
             <TextBlock Name="itemDesc" Canvas.Left="50" TextWrapping="Wrap" Text="" Canvas.Top="199"/>
         </Canvas>
-        <Label Name="emptyLbl" Content="" Canvas.Left="219" Canvas.Top="37" Foreground="Red"/>
-        <Label Content="Invoice Number:" Canvas.Left="89" Canvas.Top="108"/>
-        <Label Name="invoiceLbl" Content="" Canvas.Left="191" Canvas.Top="108"/>
+        <Label Name="emptyLbl" Content="" Canvas.Left="219" Canvas.Top="37" Foreground="Red" FontFamily="Viner Hand ITC"/>
+        <Label Content="Invoice Number:" Canvas.Left="89" Canvas.Top="108" FontFamily="Viner Hand ITC"/>
+        <Label Name="invoiceLbl" Content="" Canvas.Left="191" Canvas.Top="108" FontFamily="Viner Hand ITC"/>
     </Canvas>
 </Window>
