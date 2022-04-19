@@ -5,174 +5,254 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Reflection;
-
-
+using System.ComponentModel;
 
 namespace GroupProjectPrototype.Main
 {
+    /// <summary>
+    /// Main SQL Class
+    /// </summary>
     class clsMainSQL
     {
+        
+        // Finished
+        #region All Invoices
         /// <summary>
-        /// Item Manager object that holds the database variable
-        /// </summary>
-        clsItemManager db = new clsItemManager();
-
-       
-        /// <summary>
-        /// Populate the list with items table
+        /// Statement that returns all rows from the Invoices Table
         /// </summary>
         /// <returns></returns>
-        public clsBigBoxOfScaryThings display()
+        public string allInvoices()
         {
-
             try
             {
-                /// <summary>
-                /// clsBigBoxOfScaryThings variable that holds the data
-                /// </summary>
-                clsBigBoxOfScaryThings boxScary = new clsBigBoxOfScaryThings();
+                return "SELECT * FROM Invoices";
+            } 
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+        #endregion
 
-                /// <summary>
-                /// DataSet variable that holds the DataSet
-                /// </summary>
-                DataSet ds = new DataSet();
+        // Finished
+        #region Retrieve Business Items
+        /// <summary>
+        /// Statement that returns all business items
+        /// </summary>
+        /// <returns></returns>
+        public string getBusinessItems()
+        {
+            try
+            {
+                return "SELECT * FROM Items";
+            } 
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+        #endregion
 
-                /// <summary>
-                /// Int variable that holds the integer ret type for the loop 
-                /// </summary>
-                int ret = 0;
+        // Finished
+        #region Retrieve Invoice Items
+        /// <summary>
+        /// Statement that returns the items based on ID
+        /// </summary>
+        /// <param name="invoiceID"></param>
+        /// <returns></returns>
+        public string getInvoiceItems(string invoiceID)
+        {
+            try
+            {
+                string sql = String.Format("SELECT Items.Item_ID, Items.Item_Name, Items.Item_Description, Items.Cost ");
+                sql += String.Format("FROM Items ");
+                sql += String.Format("INNER JOIN Invoice_Item_Relation ON Invoice_Item_Relation.Item_ID = Items.Item_ID ");
+                sql += String.Format("WHERE Invoice_Item_Relation.Invoice_ID = {0} ", invoiceID);
+                return sql;
 
-                /// <summary>
-                /// String variable that holds the sql query
-                /// </summary>
-                string sql = "SELECT Item_ID, Item_Name, Cost FROM Items";
+                //return "SELECT I.Item_ID, I.Item_Name, I.Item_Description, I.Cost " +
+                //       " FROM Invoices IN " +
+                //       " JOIN Invoice_Item_Relation IR ON IR.Invoice_ID = IN.Invoice_ID " +
+                //       " JOIN Items I ON I.Item_ID = IR.Item_ID " +
+                //       " WHERE IN.Invoice_ID = " + invoiceID;
+            } catch 
+            (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+        /// <summary>
+        /// Statement that returns total cost based on ID
+        /// </summary>
+        /// <param name="invoiceID"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public string getTotalCost(string invoiceID)
+        {
+            try
+            {
+                return "SELECT Total_COST " +
+                       "FROM Invoices " +
+                       "WHERE Invoice_ID = " + invoiceID;
+            } 
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
 
-                //Extract the items and put them into the DataSet
-                ds = db.ExecuteSQLStatement(sql, ref ret);
+        /// <summary>
+        /// Returns the selected date
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public string getDate(string invoiceID)
+        {
+            try
+            {
+                return "SELECT Sell_Date " +
+                       "FROM Invoices " +
+                       "WHERE Invoice_ID = " + invoiceID;
+            } 
+            catch(Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+        #endregion
 
+        // Finished
+        #region Delete Invoice
+        /// <summary>
+        /// Statement that deletes the invoice link based in ID
+        /// </summary>
+        /// <returns></returns>
+        public string delLinkInvoice(BindingList<clsBusinessItem> itemList, string invoiceID)
+        {
+            try
+            {
+                // This is wrong
+                return "DELETE FROM Invoice_Item_Relation WHERE Invoice_ID = " + invoiceID;
+            } 
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
 
-                //Loop through the data and create scary thing classes
-                for (int i = 0; i < ret; i++)
-                {
-                    /// <summary>
-                    /// Make an item to append.
-                    /// </summary>
-                    clsScaryThing Item = new clsScaryThing();
-                    Item.invoiceID = int.Parse(ds.Tables[0].Rows[i][0].ToString());
-                    Item.item = ds.Tables[0].Rows[i]["Item_Name"].ToString();
-                    //Item.sellDate = DateTime.Parse(ds.Tables[0].Rows[i]["sellDate"].ToString());
-                    Item.cost = double.Parse(ds.Tables[0].Rows[i]["cost"].ToString());
-                    Item.description = ds.Tables[0].Rows[i]["description"].ToString();
+        /// <summary>
+        /// Statement that deletes the invoice based on ID
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public string delInvoice(string ID)
+        {
+            try
+            {
+                return "DELETE FROM Invoices WHERE Invoice_ID = " + ID;
+            } 
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+        #endregion
 
-                    boxScary.bigBox.Add(Item);
-                }
-                
+        #region Add Invoice
+        /// <summary>
+        /// Statment that adds each item in Link Table
+        /// </summary>
+        /// <returns></returns>
+        public string addInvoiceLink(clsBusinessItem item, string invoiceID)
+        {
+            try
+            {
+                // I only need Item & Invoice ID
+                string sql = "INSERT INTO Invoice_Item_Relation (Item_ID, Invoice_ID) VALUES ";
+                sql += "('";
+                sql += item.ItemID;
+                sql += "', '";
+                sql += invoiceID;
+                sql += "')";
 
-                return boxScary;
+                return sql;
+            } 
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Statement that adds Invoice to invoice table
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public string addInvoice(string totalCost, string selDate)
+        {
+            try
+            {
+                return "INSERT INTO Invoices (Total_Cost, Sell_Date)" +
+                       "VALUES( '" + totalCost + "', '" + selDate + "');";
             }
             catch (Exception ex)
             {
-                // Calling methods need to throw the exception with meaningful information.
-                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
-        } // end of display()
-
-        /// <summary>
-        /// Add user's invoice to database
-        /// </summary>
-        public string insertInvoice(double totalCost, DateTime selectedDate)
-        {
-            try
-            {
-                string insertStr = "INSERT INTO Invoices (Total_Cost, Sell_Date) VALUES ('" + Convert.ToString(totalCost) + "', " + Convert.ToString(selectedDate) + "')";
-                return insertStr;
-            } catch (Exception ex)
-            {
-                // Calling methods need to throw the exception with meaningful information.
-                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
-            }
-
         }
 
         /// <summary>
-        /// Returns the ID of the specific Invoice
+        /// Returns the max ID of the newly inserted Invoice
         /// </summary>
-        /// <param name="totalCost"></param>
-        /// <param name="selectedDate"></param>
         /// <returns></returns>
-        public string InvoiceID(double totalCost, DateTime selectedDate)
+        /// <exception cref="Exception"></exception>
+        public string maxID()
         {
             try
             {
-
-
-                string cost = Convert.ToString(totalCost);
-                string selDate = Convert.ToString(selectedDate);
-                string sql = "SELECT Invoice_ID FROM Invoices WHERE Total_Cost = " + cost + " AND " + "Sell_Date = " + selectedDate;
-
-                return sql;
-            } catch (Exception ex)
+                return "SELECT TOP 1 Invoice_ID" +
+                       " FROM Invoices " +
+                       "ORDER BY Invoice_ID DESC";
+            } 
+            catch(Exception ex)
             {
-                // Calling methods need to throw the exception with meaningful information.
-                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
         }
+        #endregion
 
-
+        #region Update Invoice
         /// <summary>
-        /// Create a query that adds to our invoice item relation table
-        /// </summary> 
-        public string relation(int returnID, int itemID)
-        {
-            try
-            {
-                string query = String.Format("INSERT INTO Invoice_Item_Relation (InvoiceID, ItemID) VALUES ({0}, {1})", returnID, itemID);
-
-                return query;
-            } catch (Exception ex)
-            {
-                // Calling methods need to throw the exception with meaningful information.
-                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
-            }
-
-        }
-
-        /// <summary>
-        /// Return string that is a delete query
+        /// Updates date and total cost based on invoice
         /// </summary>
-        public string deleteQ(string InvoiceID)
+        /// <returns></returns>
+        public string updateInvoice(string ID, string tCost, string sDate)
         {
             try
             {
-                // Create the delete query string
-                string query = "DELETE FROM Invoices WHERE Invoice_ID = " + InvoiceID;
-                return query;
-            } catch (Exception ex)
+                return "UPDATE Invoices " +
+                       "SET Total_Cost = " + tCost +
+                       ", Sell_Date = '" + sDate +
+                       "' WHERE Invoice_ID = " + ID;
+            } 
+            catch (Exception ex)
             {
-                // Calling methods need to throw the exception with meaningful information.
-                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
         }
-
-        /// <summary>
-        /// Edit Invoices based on selection
-        /// </summary>
-        public string updateInvoice(string newDate, string invoiceID)
-        {
-            try
-            {
-
-
-                string sql = String.Format("UPDATE Invoices SET Selling_Date = '{0}' WHERE InvoiceID = {1}", newDate, invoiceID);
-
-                return sql;
-            } catch (Exception ex)
-            {
-                // Calling methods need to throw the exception with meaningful information.
-                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
-            }
-        }
-
+        #endregion
 
     } // end of class
 }

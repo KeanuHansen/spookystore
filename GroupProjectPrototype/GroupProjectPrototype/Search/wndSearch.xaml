@@ -10,7 +10,7 @@
         <StackPanel Orientation="Horizontal" Canvas.Left="126" Canvas.Top="10" Width="435" Margin="149,10,209.6,360">
             <Button Name="mainButton" Content="Cancel" Canvas.Left="476" Canvas.Top="351" Width="85" Height="23" Margin="0,0,0,-0.4" VerticalAlignment="Top" Click="mainButton_Click"/>
         </StackPanel>
-        <DataGrid HorizontalAlignment="Left" Height="176" Margin="148,234,0,0" VerticalAlignment="Top" Width="501" SelectionChanged="DataGrid_SelectionChanged"/>
+        <DataGrid Name="ItemDatagrid" HorizontalAlignment="Left" Height="176" Margin="148,234,0,0" VerticalAlignment="Top" Width="501" SelectionChanged="DataGrid_SelectionChanged" IsReadOnly="True"/>
         <Label Content="Filter By Invoice Number:" HorizontalAlignment="Left" Margin="148,65,0,0" VerticalAlignment="Top"/>
         <ComboBox Name="invoiceNum" HorizontalAlignment="Left" Margin="295,68,0,0" VerticalAlignment="Top" Width="120"/>
         <Label Content="Filter By Invoice Date:" HorizontalAlignment="Left" Margin="148,160,0,0" VerticalAlignment="Top"/>

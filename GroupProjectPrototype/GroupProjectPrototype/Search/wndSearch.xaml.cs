@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 
 namespace GroupProjectPrototype
 {
-    // Poor Code Decisions to be credited to: Keanu Hansen
+    // Poor Code Decisions to be credited to: Keanu Hansen (W01402803)
 
     /// <summary>
     /// Interaction logic for SearchWindow.xaml
@@ -25,7 +25,8 @@ namespace GroupProjectPrototype
         /// <summary>
         /// Variable to fulfill the requirement: Search window should have a comment about when the invoice is selected, the Invoice ID is saved in a local variable that the main window can access.
         /// </summary>
-        string SelectedID;
+        /// From Mario - I made this public to access
+        public string SelectedID;
 
         /// <summary>
         /// Make a logic object to run queries through
@@ -40,6 +41,49 @@ namespace GroupProjectPrototype
             // PASSING DATA: Refresh the invoices, do this by having constructors that take data and running the query through that.
 
             InitializeComponent();
+
+            // Add the Invoice ID's to the page.
+            invoiceNum.ItemsSource = objectSQL.GetInvoices();
+
+            // Add the Invoice Total Cost's
+            invoiceTotalCharge.ItemsSource = objectSQL.GetTotalCost();
+
+            // Initially display all the data
+
+            /// <summary>
+            /// Make a list to colect the data
+            /// </summary>
+            // Filter based on what it has, and save it to a list to append to the data on the screen.
+            var list = objectSQL.Filter("","","");
+
+            // Append the list to the data grid.
+            ItemDatagrid.ItemsSource = list;
+
+            /// <summary>
+            /// Make a three datagidtextcolumns to append the data to
+            /// </summary>
+            // Create 4 Columns to be displayed in the Datagrid
+            DataGridTextColumn column1 = new DataGridTextColumn();
+            DataGridTextColumn column2 = new DataGridTextColumn();
+            DataGridTextColumn column3 = new DataGridTextColumn();
+
+            // Set the properties of the columns
+            column1.Header = "Invoice ID";
+            column1.Binding = new Binding("InvoiceID");
+
+            column2.Header = "Total Cost";
+            column2.Binding = new Binding("TotalCost");
+
+            column3.Header = "Sell Date";
+            column3.Binding = new Binding("SellDate");
+
+            // Add the columns to the datagrid
+            ItemDatagrid.Columns.Add(column1);
+            ItemDatagrid.Columns.Add(column2);
+            ItemDatagrid.Columns.Add(column3);
+
+            // Don't generate columns automatically
+            ItemDatagrid.AutoGenerateColumns = false;
         }
 
         /// <summary>
@@ -51,6 +95,9 @@ namespace GroupProjectPrototype
         {
             try
             {
+                ItemDatagrid.ItemsSource = null;
+                ItemDatagrid.Columns.Clear();
+
                 /// <summary>
                 /// Make a string to hold the Invoice_ID for the filter function.
                 /// </summary>
@@ -87,7 +134,33 @@ namespace GroupProjectPrototype
                 var list = objectSQL.Filter(invoiceID, totalCost, sellDate);
 
                 // Append the list to the data grid.
+                ItemDatagrid.ItemsSource = list;
 
+                /// <summary>
+                /// Make three datagridtextcolumns to append the data to 
+                /// </summary>
+                // Create 4 Columns to be displayed in the Datagrid
+                DataGridTextColumn column1 = new DataGridTextColumn();
+                DataGridTextColumn column2 = new DataGridTextColumn();
+                DataGridTextColumn column3 = new DataGridTextColumn();
+
+                // Set the properties of the columns
+                column1.Header = "Invoice ID";
+                column1.Binding = new Binding("InvoiceID");
+
+                column2.Header = "Total Cost";
+                column2.Binding = new Binding("TotalCost");
+
+                column3.Header = "Sell Date";
+                column3.Binding = new Binding("SellDate");
+
+                // Add the columns to the datagrid
+                ItemDatagrid.Columns.Add(column1);
+                ItemDatagrid.Columns.Add(column2);
+                ItemDatagrid.Columns.Add(column3);
+
+                // Don't generate columns automatically
+                ItemDatagrid.AutoGenerateColumns = false;
             }
             catch (Exception ex)
             {
@@ -107,6 +180,52 @@ namespace GroupProjectPrototype
         {
             try
             {
+                // Clear all the items in the datagrid
+                ItemDatagrid.ItemsSource = null;
+                ItemDatagrid.Columns.Clear();
+
+                // Clear all the search values
+                invoiceDate.SelectedDate = null;
+                invoiceNum.SelectedItem = null;
+                invoiceTotalCharge.SelectedItem = null;
+
+                // Set the ID to null
+                SelectedID = null;
+
+                /// <summary>
+                /// Make a list item to append the data to.
+                /// </summary>
+                // Filter based on what it has, and save it to a list to append to the data on the screen.
+                var list = objectSQL.Filter("", "", "");
+
+                // Append the list to the data grid.
+                ItemDatagrid.ItemsSource = list;
+
+                /// <summary>
+                /// Make a three datagridtextcolumns to append the data to.
+                /// </summary>
+                // Create 4 Columns to be displayed in the Datagrid
+                DataGridTextColumn column1 = new DataGridTextColumn();
+                DataGridTextColumn column2 = new DataGridTextColumn();
+                DataGridTextColumn column3 = new DataGridTextColumn();
+
+                // Set the properties of the columns
+                column1.Header = "Invoice ID";
+                column1.Binding = new Binding("InvoiceID");
+
+                column2.Header = "Total Cost";
+                column2.Binding = new Binding("TotalCost");
+
+                column3.Header = "Sell Date";
+                column3.Binding = new Binding("SellDate");
+
+                // Add the columns to the datagrid
+                ItemDatagrid.Columns.Add(column1);
+                ItemDatagrid.Columns.Add(column2);
+                ItemDatagrid.Columns.Add(column3);
+
+                // Don't generate columns automatically
+                ItemDatagrid.AutoGenerateColumns = false;
 
             }
             catch (Exception ex)
@@ -127,17 +246,8 @@ namespace GroupProjectPrototype
         {
             try
             {
-                // PASSING DATA: Get the data from the selected item in the DataGrid. It is passed into the SelectedItem variable.
-                // Not needed for this part though, just need to plan it, if I understand the instructions.
-
-                // Create the wndMain variable.
-                // PASSING DATA: Pass the selected invoice into the constructor, as it should have a constructor for specific invoices.
-                MainWindow wndMain = new MainWindow();
-
-                // Go to the wndMain page.
-                this.Hide();
-                wndMain.ShowDialog();
-                this.Show();
+                // Main Window deals with the data extraction
+                this.Close();
             }
             catch (Exception ex)
             {
@@ -157,39 +267,11 @@ namespace GroupProjectPrototype
         {
             try
             {
-                // Create the wndMain variable.
-                MainWindow wndMain = new MainWindow();
+                // Set this to null, as they are pushing cancel
+                SelectedID = null;
 
-                // Go to the wndMain page.
-                this.Hide();
-                wndMain.ShowDialog();
-                this.Show();
-            }
-            catch (Exception ex)
-            {
-                // Handle the error in top level method calls.
-                System.IO.File.AppendAllText("C:\\HandleError.txt",
-                    Environment.NewLine + "HandleError Exception " +
-                        ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// Return to the main window, but under the pretense of editing.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void editButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                // Create the wndItems variable.
-                EditWindow wndItems = new EditWindow();
-
-                // Go to the wndItems page.
-                this.Hide();
-                wndItems.ShowDialog();
-                this.Show();
+                // Main Window deals with the data extraction
+                this.Close();
             }
             catch (Exception ex)
             {
@@ -209,8 +291,16 @@ namespace GroupProjectPrototype
         {
             try
             {
+                ///<summary>
+                ///Create a clsInvoice to hold the itemdatagrid in
+                /// </summary>
                 // Change the option to the SelectedID up top.
+                var item = ((clsInvoice)ItemDatagrid.SelectedItem);
 
+                if(item != null)
+                {
+                    SelectedID = item.InvoiceID;
+                }
             }
             catch (Exception ex)
             {
