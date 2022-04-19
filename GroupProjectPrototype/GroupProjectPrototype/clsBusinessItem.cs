@@ -12,29 +12,56 @@ namespace GroupProjectPrototype
     /// </summary>
     public class clsBusinessItem
     {
+        /// <summary>
+        /// String variable to hold the itemID
+        /// </summary>
         private string itemID;
 
+        /// <summary>
+        /// String variable to hold the ItemID
+        /// </summary>
         public string ItemID
         {
             get { return itemID; }
             set { itemID = value; }
         }
 
+        /// <summary>
+        /// String variable to hold the itemName
+        /// </summary>
         private string itemName;
+
+        /// <summary>
+        /// String variable to hold the ItemName
+        /// </summary>
         public string ItemName
         {
             get { return itemName; }
             set { itemName = value; }
         }
 
+        /// <summary>
+        /// String variable to hold the itemDescription
+        /// </summary>
         private string itemDescription;
+
+        /// <summary>
+        /// String variable to hold the ItemDescription
+        /// </summary>
         public string ItemDescription
         {
             get { return itemDescription; }
             set { itemDescription = value; }
         }
 
+        /// <summary>
+        /// String variable to hold the cost
+        /// </summary>
         private string cost;
+
+        /// <summary>
+        /// String variable to hold the Cost
+        /// </summary>
         public string Cost
         {
             get { return cost; }

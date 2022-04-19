@@ -66,6 +66,9 @@ namespace GroupProjectPrototype.Main
         {
             try
             {
+                /// <summary>
+                /// String variable to hold the query
+                /// </summary>
                 string sql = String.Format("SELECT Items.Item_ID, Items.Item_Name, Items.Item_Description, Items.Cost ");
                 sql += String.Format("FROM Items ");
                 sql += String.Format("INNER JOIN Invoice_Item_Relation ON Invoice_Item_Relation.Item_ID = Items.Item_ID ");
@@ -84,6 +87,7 @@ namespace GroupProjectPrototype.Main
                     MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
         }
+
         /// <summary>
         /// Statement that returns total cost based on ID
         /// </summary>
@@ -175,6 +179,9 @@ namespace GroupProjectPrototype.Main
         {
             try
             {
+                /// <summary>
+                /// String variable to hold the query
+                /// </summary>
                 // I only need Item & Invoice ID
                 string sql = "INSERT INTO Invoice_Item_Relation (Item_ID, Invoice_ID) VALUES ";
                 sql += "('";

@@ -35,6 +35,9 @@ namespace GroupProjectPrototype
         /// </summary>
         clsItemsLogic editItem;
 
+        /// <summary>
+        /// Int variable to hold the item id
+        /// </summary>
         int ItemID;
 
         public EditWindow()

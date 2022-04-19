@@ -33,6 +33,9 @@ namespace GroupProjectPrototype
 		/// </summary>
 		public static string TotalCost;
 
+		/// <summary>
+		/// Static int to hold number of items
+		/// </summary>
 		public static int numItems;
 
 		/* NOTE: selDate, TotalCost, and numItems are based on ID passed in getInvoiceItems() 
@@ -102,14 +105,23 @@ namespace GroupProjectPrototype
         {
             try
             {
+				/// <summary>
+				/// cksMainSQL to hold SQL variable
+				/// </summary>
 				clsMainSQL sSQL = new clsMainSQL();
 
+				/// <summary>
+				/// DataSet variable to hold DataSet
+				/// </summary>
 				// Create a dataset to hold our data
 				DataSet ds = new DataSet();
 
 				// Create a new list each time this method is called
 				bigBox = new List<clsBusinessItem>();
 
+				/// <summary>
+				/// clsDataAccess to hold clsDataAccess
+				/// </summary>
 				// Create SQL object within static method
 				clsDataAccess db = new clsDataAccess();
 				

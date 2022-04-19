@@ -34,6 +34,9 @@ public class clsDataAccess
     {
         try
         {
+            /// <summary>
+            /// DataSet variable to hold the data set
+            /// </summary>
             //Create a new DataSet
             DataSet ds = new DataSet();
 
@@ -76,6 +79,9 @@ public class clsDataAccess
     {
         try
         {
+            /// <summary>
+            /// Object variable to hold the object
+            /// </summary>
             //Holds the return value
             object obj;
 
@@ -123,6 +129,9 @@ public class clsDataAccess
     {
         try
         {
+            /// <summary>
+            /// Int variable to hold the number of rows
+            /// </summary>
             //Number of rows affected
             int iNumRows;
 

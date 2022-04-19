@@ -12,24 +12,52 @@ namespace GroupProjectPrototype
         /// <summary>
         /// Public data members
         /// </summary>
+
+        /// <summary>
+        /// String variable to hold the invoiceID
+        /// </summary>
         public string invoiceID;
+
+        /// <summary>
+        /// String variable to hold the InvoiceID
+        /// </summary>
         public string InvoiceID
         {
             get { return invoiceID; }
             set { invoiceID = value; }
         }
+
+        /// <summary>
+        /// String variable to hold the totalCost
+        /// </summary>
         public string totalCost;
+
+        /// <summary>
+        /// String variable to hold the TotalCost
+        /// </summary>
         public string TotalCost
         {
             get { return totalCost; }
             set { totalCost = value; }
         }
+
+        /// <summary>
+        /// String variable to hold the sellDate
+        /// </summary>
         public string selDate;
+
+        /// <summary>
+        /// String variable to hold the SellDate
+        /// </summary>
         public string SellDate
         {
             get { return selDate; }
             set { selDate = value; }
         }
+
+        /// <summary>
+        /// String variable to hold the stringType
+        /// </summary>
         public string stringType { get; set; }
 
         /// <summary>

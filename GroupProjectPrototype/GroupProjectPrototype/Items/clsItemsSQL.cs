@@ -15,8 +15,15 @@ namespace GroupProjectPrototype.Search
         /// Item Manager object that holds the database variable
         /// </summary>
         clsDataAccess db;
+
+        /// <summary>
+        /// Data Set object that holds the dataset
+        /// </summary>
         DataSet ds;
 
+        /// <summary>
+        /// Int variable to hold item ID
+        /// </summary>
         int itemID;
 
         /// <summary>
@@ -46,6 +53,9 @@ namespace GroupProjectPrototype.Search
         {
             try
             {
+                /// <summary>
+                /// String variable to hold the query
+                /// </summary>
                 string updateCost = "UPDATE Items SET Cost = " + newCost + " WHERE Item_ID = " + itemID;
                 return updateCost;
             }
@@ -65,6 +75,9 @@ namespace GroupProjectPrototype.Search
         {
             try
             {
+                /// <summary>
+                /// String variable to hold the query
+                /// </summary>
                 string updateName = ("UPDATE Items SET Item_Name = '" + newName + "' WHere Item_ID LIKE " + itemID);
                 return updateName;
             }
@@ -84,6 +97,9 @@ namespace GroupProjectPrototype.Search
         {
             try
             {
+                /// <summary>
+                /// String variable to hold the query
+                /// </summary>
                 string updateDes = "UPDATE Items SET Item_Description = '" + newDes + "' WHERE Item_ID LIKE " + itemID;
                 return updateDes;
             }
@@ -102,6 +118,9 @@ namespace GroupProjectPrototype.Search
         {
             try
             {
+                /// <summary>
+                /// String variable to hold the query
+                /// </summary>
                 string delete = "DELETE FROM Items WHERE Item_ID = " + itemID;
                 return delete;
             }
@@ -123,7 +142,9 @@ namespace GroupProjectPrototype.Search
         {
             try
             {
-
+                /// <summary>
+                /// String variable to hold the query
+                /// </summary>
                 string addingItem = "INSERT INTO Items (Item_Name, Item_Description, Cost) VALUES ('" + name + "', '" + description + "', " + cost + ")";
                 return addingItem;
             }
@@ -142,6 +163,9 @@ namespace GroupProjectPrototype.Search
         {
             try
             {
+                /// <summary>
+                /// String variable to hold the query
+                /// </summary>
                 string check = "SELECT * FROM Invoice_Item_Relation WHERE Item_ID = " + itemID;
                 return check;
             }
@@ -160,6 +184,9 @@ namespace GroupProjectPrototype.Search
         {
             try
             {
+                /// <summary>
+                /// String variable to hold the query
+                /// </summary>
                 string sql = "SELECT * FROM Items";
                 return sql;
             }
@@ -179,6 +206,9 @@ namespace GroupProjectPrototype.Search
         {
             try
             {
+                /// <summary>
+                /// String variable to hold the query
+                /// </summary>
                 string sql = "SELECT * FROM Items WHERE Item_Name LIKE '" + name + "'";
                 return sql;
             }
@@ -197,6 +227,9 @@ namespace GroupProjectPrototype.Search
         {
             try
             {
+                /// <summary>
+                /// String variable to hold the query
+                /// </summary>
                 string sql = "SELECT Item_Name FROM Items WHERE Item_ID = " + this.itemID;
                 return sql;
             }
@@ -215,6 +248,9 @@ namespace GroupProjectPrototype.Search
         {
             try
             {
+                /// <summary>
+                /// String variable to hold the query
+                /// </summary>
                 string sql = "SELECT Cost FROM Items WHERE Item_ID = " + this.itemID;
                 return sql;
             }
@@ -233,6 +269,9 @@ namespace GroupProjectPrototype.Search
         {
             try
             {
+                /// <summary>
+                /// String variable to hold the query
+                /// </summary>
                 string sql = "SELECT Item_Description FROM Items WHERE Item_ID = " + this.itemID;
                 return sql;
             }

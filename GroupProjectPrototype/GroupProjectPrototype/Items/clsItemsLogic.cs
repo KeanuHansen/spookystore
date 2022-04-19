@@ -12,7 +12,6 @@ namespace GroupProjectPrototype
 {
     class clsItemsLogic
     {
-
         /// <summary>
         /// in variable to hold the itemID
         /// </summary>
@@ -70,7 +69,6 @@ namespace GroupProjectPrototype
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
         }
-
 
         /// <summary>
         /// checks that the item isnt on any invoices
@@ -156,6 +154,9 @@ namespace GroupProjectPrototype
         {
             try
             {
+                /// <summary>
+                /// variable to hold the return value reference
+                /// </summary>
                 int retVal = 0;
                 itemManage.ExecuteSQLStatement(itemSQL.checkDoubleItem(name), ref retVal);
 
@@ -180,7 +181,14 @@ namespace GroupProjectPrototype
         {
             try
             {
+                /// <summary>
+                /// variable to hold the return value reference
+                /// </summary>
                 int retVal = 0;
+
+                /// <summary>
+                /// string variable to hold the name
+                /// </summary>
                 string name = "";
 
                 ds = itemManage.ExecuteSQLStatement(itemSQL.getItemName(), ref retVal);
@@ -195,16 +203,23 @@ namespace GroupProjectPrototype
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
         }
+
         /// <summary>
         /// returns the cost of the item
         /// </summary>
         /// <returns></returns>
-
         public double getCost()
         {
             try
             {
+                /// <summary>
+                /// variable to hold the return value reference
+                /// </summary>
                 int retVal = 0;
+
+                /// <summary>
+                /// double variable to hold the cost
+                /// </summary>
                 double cost = 0.0;
 
                 ds = itemManage.ExecuteSQLStatement(itemSQL.getItemCost(), ref retVal);
@@ -228,7 +243,14 @@ namespace GroupProjectPrototype
         {
             try
             {
+                /// <summary>
+                /// variable to hold the return value reference
+                /// </summary>
                 int retVal = 0;
+
+                /// <summary>
+                /// string variable to hold the description
+                /// </summary>
                 string des = "";
 
                 ds = itemManage.ExecuteSQLStatement(itemSQL.getItemDes(), ref retVal);

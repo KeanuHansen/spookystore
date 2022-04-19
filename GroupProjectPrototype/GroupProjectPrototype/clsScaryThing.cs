@@ -11,10 +11,29 @@ namespace GroupProjectPrototype
 	class clsScaryThing
 	{
 		//public string invoiceID { get; set; } I dont think this one is necessary since main is passing in ID
+		/// <summary>
+		/// String variable to hold the itemID
+		/// </summary>
 		public string itemID { get; set; }
+
+		/// <summary>
+		/// String variable to hold the item
+		/// </summary>
 		public string item { get; set; }
+
+		/// <summary>
+		/// DateTime variable to hold the sellDate
+		/// </summary>
 		public DateTime sellDate { get; set; }
+
+		/// <summary>
+		/// String variable to hold the cost
+		/// </summary>
 		public string cost { get; set; } // cost of singular item? 
+
+		/// <summary>
+		/// String variable to hold the description
+		/// </summary>
 		public string description { get; set; }
         
 		/// <summary>
@@ -24,6 +43,7 @@ namespace GroupProjectPrototype
         {
 
         }
+
 		/// <summary>
 		/// Parameterized Constructor
 		/// </summary>
