@@ -46,6 +46,7 @@ C:\Users\keanu\Source\Repos\KeanuHansen\spookystore\GroupProjectPrototype\GroupP
 C:\Users\keanu\Source\Repos\KeanuHansen\spookystore\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\App.g.cs
 C:\Users\keanu\Source\Repos\KeanuHansen\spookystore\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\GroupProjectPrototype_MarkupCompile.cache
 C:\Users\keanu\Source\Repos\KeanuHansen\spookystore\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\GroupProjectPrototype_MarkupCompile.lref
+C:\Users\keanu\Source\Repos\KeanuHansen\spookystore\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\Items\wndItems.baml
 C:\Users\keanu\Source\Repos\KeanuHansen\spookystore\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\Main\wndMain.baml
 C:\Users\keanu\Source\Repos\KeanuHansen\spookystore\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\Search\wndSearch.baml
 C:\Users\keanu\Source\Repos\KeanuHansen\spookystore\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\GroupProjectPrototype.g.resources
@@ -54,5 +55,3 @@ C:\Users\keanu\Source\Repos\KeanuHansen\spookystore\GroupProjectPrototype\GroupP
 C:\Users\keanu\Source\Repos\KeanuHansen\spookystore\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\GroupProjectPrototype.csproj.CoreCompileInputs.cache
 C:\Users\keanu\Source\Repos\KeanuHansen\spookystore\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\GroupProjectPrototype.exe
 C:\Users\keanu\Source\Repos\KeanuHansen\spookystore\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\GroupProjectPrototype.pdb
-C:\Users\keanu\Source\Repos\KeanuHansen\spookystore\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\GroupProjectPrototype.csprojAssemblyReference.cache
-C:\Users\keanu\Source\Repos\KeanuHansen\spookystore\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\Items\wndItems.baml
