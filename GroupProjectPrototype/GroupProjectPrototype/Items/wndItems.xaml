@@ -6,33 +6,33 @@
         xmlns:local="clr-namespace:GroupProjectPrototype"
         mc:Ignorable="d"
         Title="EditWindow" Height="800" Width="800">
-    <Grid>
+    <Grid Background="#FFC19765">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="655*"/>
             <ColumnDefinition Width="139*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal" Width="435" Margin="60,0,159.4,685.4">
-            <Button Name="btnCancel" Content="Cancel" Canvas.Left="476" Canvas.Top="351" Width="85" Height="23"  Click="cancelButton_Click"/>
+            <Button Name="btnCancel" Content="Cancel" Canvas.Left="476" Canvas.Top="351" Width="85" Height="23"  Click="cancelButton_Click" FontFamily="Viner Hand ITC" FontSize="16" Foreground="Black" Background="#FFA86130"/>
         </StackPanel>
-        <DataGrid Name ="itemsGrid" HorizontalAlignment="Left" Height="216" Margin="46,90,0,0" VerticalAlignment="Top" Width="412"/>
-        <Button Name ="btnAddItem"  Content="Add Item" Grid.Column="1" HorizontalAlignment="Left" Margin="9.6,273,0,0" VerticalAlignment="Top" Width="75" Click="btnAddItem_Click"/>
-        <Label Content="Item Name:" HorizontalAlignment="Left" Margin="522,109,0,0" VerticalAlignment="Top"/>
+        <DataGrid Name ="itemsGrid" HorizontalAlignment="Left" Height="216" Margin="46,90,0,0" VerticalAlignment="Top" Width="412" FontFamily="Viner Hand ITC"/>
+        <Button Name ="btnAddItem"  Content="Add Item" Grid.Column="1" HorizontalAlignment="Left" Margin="0,273,0,0" VerticalAlignment="Top" Width="85" Click="btnAddItem_Click" FontFamily="Viner Hand ITC" FontSize="16" RenderTransformOrigin="0.522,0" Background="#FFA86130"/>
+        <Label Content="Item Name:" HorizontalAlignment="Left" Margin="522,109,0,0" VerticalAlignment="Top" FontFamily="Viner Hand ITC"/>
         <TextBox Name ="txtNewItemName"  Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" Margin="619,112,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Cost:" HorizontalAlignment="Left" Margin="557,140,0,0" VerticalAlignment="Top"/>
+        <Label Content="Cost:" HorizontalAlignment="Left" Margin="557,140,0,0" VerticalAlignment="Top" FontFamily="Viner Hand ITC"/>
         <TextBox Name ="txtNewItemCost"  Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="23" Margin="619,143,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Description:" HorizontalAlignment="Left" Margin="520,171,0,0" VerticalAlignment="Top"/>
+        <Label Content="Description:" HorizontalAlignment="Left" Margin="520,171,0,0" VerticalAlignment="Top" FontFamily="Viner Hand ITC"/>
         <TextBox Name="txtNewItemDes" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="83" Margin="619,173,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <GroupBox Header="Add New Item" HorizontalAlignment="Left" Height="216" Margin="495,90,0,0" VerticalAlignment="Top" Width="274" Grid.ColumnSpan="2"/>
-        <Button Name ="btnSaveEdit"  Content="Save" HorizontalAlignment="Left" Margin="9.6,525,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Click="btnSaveEdit_Click"/>
-        <Label Content="Item Name:" HorizontalAlignment="Left" Margin="522,355,0,0" VerticalAlignment="Top"/>
+        <GroupBox Header="Add New Item" HorizontalAlignment="Left" Height="216" Margin="495,90,0,0" VerticalAlignment="Top" Width="274" Grid.ColumnSpan="2" FontFamily="Viner Hand ITC" BorderBrush="#FF704120"/>
+        <Button Name ="btnSaveEdit"  Content="Save" HorizontalAlignment="Left" Margin="9.6,525,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Click="btnSaveEdit_Click" FontFamily="Viner Hand ITC" FontSize="16" Background="#FFA86130"/>
+        <Label Content="Item Name:" HorizontalAlignment="Left" Margin="522,355,0,0" VerticalAlignment="Top" FontFamily="Viner Hand ITC"/>
         <TextBox Name ="txtItemName" HorizontalAlignment="Left" Height="23" Margin="619,358,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
-        <Label Content="Cost:" HorizontalAlignment="Left" Margin="557,389,0,0" VerticalAlignment="Top"/>
+        <Label Content="Cost:" HorizontalAlignment="Left" Margin="557,389,0,0" VerticalAlignment="Top" FontFamily="Viner Hand ITC"/>
         <TextBox Name ="txtCost" HorizontalAlignment="Left" Height="23" Margin="619,391,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
-        <Label Content="Description:" HorizontalAlignment="Left" Margin="520,420,0,0" VerticalAlignment="Top"/>
+        <Label Content="Description:" HorizontalAlignment="Left" Margin="520,420,0,0" VerticalAlignment="Top" FontFamily="Viner Hand ITC"/>
         <TextBox Name="txtDescription" HorizontalAlignment="Left" Height="83" Margin="619,420,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
-        <GroupBox Header="Edit Item" HorizontalAlignment="Left" Height="216" Margin="495,341,0,0" VerticalAlignment="Top" Width="274" Grid.ColumnSpan="2"/>
-        <ComboBox Name ="cmbItemList" HorizontalAlignment="Left" Margin="46,341,0,0" VerticalAlignment="Top" Width="181" SelectionChanged="cmbItemList_SelectionChanged"/>
-        <Button Name ="btnSelectItem" Content="Select Item" HorizontalAlignment="Left" Margin="46,391,0,0" VerticalAlignment="Top" Width="75" Click="btnSelectItem_Click"/>
-        <Button Name ="btnDeleteItem" Content="Delete" HorizontalAlignment="Left" Margin="152,391,0,0" VerticalAlignment="Top" Width="75" Click="btnDeleteItem_Click"/>
+        <GroupBox Header="Edit Item" HorizontalAlignment="Left" Height="216" Margin="495,341,0,0" VerticalAlignment="Top" Width="274" Grid.ColumnSpan="2" FontFamily="Viner Hand ITC" BorderBrush="#FF704120"/>
+        <ComboBox Name ="cmbItemList" HorizontalAlignment="Left" Margin="46,341,0,0" VerticalAlignment="Top" Width="181" SelectionChanged="cmbItemList_SelectionChanged" FontFamily="Viner Hand ITC"/>
+        <Button Name ="btnSelectItem" Content="Select Item" HorizontalAlignment="Left" Margin="46,391,0,0" VerticalAlignment="Top" Width="75" Click="btnSelectItem_Click" FontFamily="Viner Hand ITC" Background="#FFA86130"/>
+        <Button Name ="btnDeleteItem" Content="Delete" HorizontalAlignment="Left" Margin="152,391,0,0" VerticalAlignment="Top" Width="75" Click="btnDeleteItem_Click" FontFamily="Viner Hand ITC" Background="#FFA86130"/>
     </Grid>
 </Window>
