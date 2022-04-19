@@ -55,3 +55,4 @@ C:\Users\keanu\Source\Repos\KeanuHansen\spookystore\GroupProjectPrototype\GroupP
 C:\Users\keanu\Source\Repos\KeanuHansen\spookystore\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\GroupProjectPrototype.csproj.CoreCompileInputs.cache
 C:\Users\keanu\Source\Repos\KeanuHansen\spookystore\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\GroupProjectPrototype.exe
 C:\Users\keanu\Source\Repos\KeanuHansen\spookystore\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\GroupProjectPrototype.pdb
+C:\Users\keanu\source\repos\KeanuHansen\spookystore\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\GroupProjectPrototype.csprojAssemblyReference.cache
