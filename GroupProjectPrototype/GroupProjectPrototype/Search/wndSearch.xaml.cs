@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 
 namespace GroupProjectPrototype
 {
-    // Poor Code Decisions to be credited to: Keanu Hansen
+    // Poor Code Decisions to be credited to: Keanu Hansen (W01402803)
 
     /// <summary>
     /// Interaction logic for SearchWindow.xaml
@@ -50,12 +50,18 @@ namespace GroupProjectPrototype
 
             // Initially display all the data
 
+            /// <summary>
+            /// Make a list to colect the data
+            /// </summary>
             // Filter based on what it has, and save it to a list to append to the data on the screen.
             var list = objectSQL.Filter("","","");
 
             // Append the list to the data grid.
             ItemDatagrid.ItemsSource = list;
 
+            /// <summary>
+            /// Make a three datagidtextcolumns to append the data to
+            /// </summary>
             // Create 4 Columns to be displayed in the Datagrid
             DataGridTextColumn column1 = new DataGridTextColumn();
             DataGridTextColumn column2 = new DataGridTextColumn();
@@ -91,12 +97,6 @@ namespace GroupProjectPrototype
             {
                 ItemDatagrid.ItemsSource = null;
                 ItemDatagrid.Columns.Clear();
-
-                // Redo this, but make it so it can do one of many queries.
-
-                // Have three query / four query options, based on the selection.
-
-                // Append the clsInvoiceList to the datagrid
 
                 /// <summary>
                 /// Make a string to hold the Invoice_ID for the filter function.
@@ -136,6 +136,9 @@ namespace GroupProjectPrototype
                 // Append the list to the data grid.
                 ItemDatagrid.ItemsSource = list;
 
+                /// <summary>
+                /// Make three datagridtextcolumns to append the data to 
+                /// </summary>
                 // Create 4 Columns to be displayed in the Datagrid
                 DataGridTextColumn column1 = new DataGridTextColumn();
                 DataGridTextColumn column2 = new DataGridTextColumn();
@@ -189,12 +192,18 @@ namespace GroupProjectPrototype
                 // Set the ID to null
                 SelectedID = null;
 
+                /// <summary>
+                /// Make a list item to append the data to.
+                /// </summary>
                 // Filter based on what it has, and save it to a list to append to the data on the screen.
                 var list = objectSQL.Filter("", "", "");
 
                 // Append the list to the data grid.
                 ItemDatagrid.ItemsSource = list;
 
+                /// <summary>
+                /// Make a three datagridtextcolumns to append the data to.
+                /// </summary>
                 // Create 4 Columns to be displayed in the Datagrid
                 DataGridTextColumn column1 = new DataGridTextColumn();
                 DataGridTextColumn column2 = new DataGridTextColumn();
@@ -282,6 +291,9 @@ namespace GroupProjectPrototype
         {
             try
             {
+                ///<summary>
+                ///Create a clsInvoice to hold the itemdatagrid in
+                /// </summary>
                 // Change the option to the SelectedID up top.
                 var item = ((clsInvoice)ItemDatagrid.SelectedItem);
 

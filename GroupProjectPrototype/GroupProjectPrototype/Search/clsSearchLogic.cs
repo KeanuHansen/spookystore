@@ -11,7 +11,7 @@ namespace GroupProjectPrototype
 {
     class clsSearchLogic
     {
-        // Poor Code Decisions to be credited to: Keanu Hansen
+        // Poor Code Decisions to be credited to: Keanu Hansen (W01402803)
 
         /// <summary>
         /// clsSearchSQL variable that holds the class so I can pull the query
@@ -52,6 +52,9 @@ namespace GroupProjectPrototype
                 clsDataAccess db = new clsDataAccess(); ;
 
                 // Select all items in this invoice ID in a query
+                /// <summary>
+                /// Creates a string variable to hold the query.
+                /// </summary>
                 string sql = searchSQL.Filter(invoiceID, totalCost, sellDate);
 
                 //Extract the items and put them into the DataSet
@@ -74,19 +77,35 @@ namespace GroupProjectPrototype
             }
         }
 
+        /// <summary>
+        /// This method gets the invoices for the combo box.
+        /// </summary>
+        /// <returns>Returns List<clsInvoice></returns>
         public List<clsInvoice> GetInvoices()
         {
             try
             {
+                /// <summary>
+                /// Creates a dataset variable to hold the data.
+                /// </summary>
                 // Create a dataset to hold our data
                 DataSet ds = new DataSet();
 
+                /// <summary>
+                /// Creates a List<clsInvoice> variable to hold the data.
+                /// </summary>
                 // Create a new list each time this method is called
                 List<clsInvoice> bigBox = new List<clsInvoice>();
 
+                /// <summary>
+                /// Creates a database variable to run the query.
+                /// </summary>
                 // Create SQL object within static method
                 clsDataAccess db = new clsDataAccess();
 
+                /// <summary>
+                /// Creates an int variable to hold the reference integer.
+                /// </summary>
                 // Create reference
                 int refItems = 0;
 
@@ -109,19 +128,35 @@ namespace GroupProjectPrototype
             }
         }
 
+        /// <summary>
+        /// This method gets the total cost for the combo box.
+        /// </summary>
+        /// <returns>Returns List<clsInvoice></returns>
         public List<clsInvoice> GetTotalCost()
         {
             try
             {
+                /// <summary>
+                /// Creates a dataset variable to hold the data.
+                /// </summary>
                 // Create a dataset to hold our data
                 DataSet ds = new DataSet();
 
+                /// <summary>
+                /// Creates a List<clsInvoice> variable to hold the data.
+                /// </summary>
                 // Create a new list each time this method is called
                 List<clsInvoice> bigBox = new List<clsInvoice>();
 
+                /// <summary>
+                /// Creates a database variable to run the query.
+                /// </summary>
                 // Create SQL object within static method
                 clsDataAccess db = new clsDataAccess();
 
+                /// <summary>
+                /// Creates an int variable to hold the reference integer.
+                /// </summary>
                 // Create reference
                 int refItems = 0;
 

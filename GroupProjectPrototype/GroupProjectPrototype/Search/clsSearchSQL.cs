@@ -5,19 +5,20 @@ namespace GroupProjectPrototype.Search
 {
     class clsSearchSQL
     {
-        // Poor Code Decisions to be credited to: Keanu Hansen
+        // Poor Code Decisions to be credited to: Keanu Hansen (W01402803)
 
         /// <summary>
         /// This method filters for items in an invoice based on the Invoice_ID, Total_Cost, Sell_Date.
         /// </summary>
         /// <returns>Returns a sql query.</returns>
-        // READ NOTE BELOW
-        // NOTE: I could have split this up into multiple queries, but I found making a dynamic one to be best. That way it is less clunky.
         public string Filter(string invoice, string cost, string date)
         {
             {
                 try
                 {
+                    /// <summary>
+                    /// Creates a string variable to hold the query.
+                    /// </summary>
                     string sql = String.Format("SELECT Invoice_ID, Total_Cost, Sell_Date FROM Invoices ");
 
                     if(invoice != "" || cost != "" || date != "")
@@ -78,7 +79,7 @@ namespace GroupProjectPrototype.Search
         {
             get
             {
-                return "SELECT DISTINCT Total_Cost FROM Invoices ";
+                return "SELECT DISTINCT Total_Cost FROM Invoices ORDER BY Total_Cost ASC ";
             }
         }
     }
