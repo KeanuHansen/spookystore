@@ -49,6 +49,14 @@ namespace GroupProjectPrototype {
         #line hidden
         
         
+        #line 13 "..\..\..\Search\wndSearch.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.DataGrid ItemDatagrid;
+        
+        #line default
+        #line hidden
+        
+        
         #line 15 "..\..\..\Search\wndSearch.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ComboBox invoiceNum;
@@ -136,9 +144,10 @@ namespace GroupProjectPrototype {
             #line hidden
             return;
             case 2:
+            this.ItemDatagrid = ((System.Windows.Controls.DataGrid)(target));
             
             #line 13 "..\..\..\Search\wndSearch.xaml"
-            ((System.Windows.Controls.DataGrid)(target)).SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(this.DataGrid_SelectionChanged);
+            this.ItemDatagrid.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(this.DataGrid_SelectionChanged);
             
             #line default
             #line hidden
