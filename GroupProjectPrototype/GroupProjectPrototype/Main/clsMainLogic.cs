@@ -87,7 +87,6 @@ namespace GroupProjectPrototype
 
                 // Deletes invoice from Invoices table
                 db.ExecuteNonQuery(sSQL.delInvoice(ID));
-
             } 
             catch (Exception ex)
             {
@@ -112,8 +111,15 @@ namespace GroupProjectPrototype
                 // Retrieve the new ID
                 invoiceID = db.ExecuteScalarSQL(sSQL.maxID());
 
-                // Add Items to relation table
-                db.ExecuteNonQuery(sSQL.addInvoiceLink(itemsList, invoiceID));
+
+                // Loop through each item in the list
+                foreach (clsBusinessItem item in itemsList)
+                {
+                    // Add Items to relation table
+                    db.ExecuteNonQuery(sSQL.addInvoiceLink(item, invoiceID));
+                }
+
+                
 
             } 
             catch(Exception ex)
@@ -124,6 +130,7 @@ namespace GroupProjectPrototype
         }
         #endregion
 
+        #region Update Invoice
         /// <summary>
         /// Updates Selected invoice based on invoice ID
         /// </summary>
@@ -139,7 +146,14 @@ namespace GroupProjectPrototype
                 db.ExecuteNonQuery(sSQL.delLinkInvoice(itemsList, iID));
 
                 // Add Items to relation table
-                db.ExecuteNonQuery(sSQL.addInvoiceLink(itemsList, iID));
+                //db.ExecuteNonQuery(sSQL.addInvoiceLink(itemsList, iID));
+
+                // Loop through each item in the list
+                foreach (clsBusinessItem item in itemsList)
+                {
+                    // Add Items to relation table
+                    db.ExecuteNonQuery(sSQL.addInvoiceLink(item, iID));
+                }
             } 
             catch (Exception ex)
             {
@@ -147,7 +161,7 @@ namespace GroupProjectPrototype
                     MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
         }
-
+        #endregion
 
     } // end of class
 }
