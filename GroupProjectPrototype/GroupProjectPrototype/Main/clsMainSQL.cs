@@ -165,29 +165,17 @@ namespace GroupProjectPrototype.Main
         /// Statment that adds each item in Link Table
         /// </summary>
         /// <returns></returns>
-        public string addInvoiceLink(BindingList<clsBusinessItem> itemsList, string invoiceID)
+        public string addInvoiceLink(clsBusinessItem item, string invoiceID)
         {
             try
             {
                 // I only need Item & Invoice ID
-                string sql = "INSERT INTO Invoice_Item_Relation (Item_ID, Invoice_ID) ";
-                sql += "VALUES ";
-
-                // Loop through each item in list
-                foreach(clsBusinessItem item in itemsList)
-                {
-                    sql += "('";
-                    sql += item.ItemID + "', '" + invoiceID;
-                    sql += "'), ";
-                }
-
-
-                // Trim off the extra comma & space
-                sql = sql.TrimEnd(' ');
-                sql = sql.TrimEnd(',');
-
-                // Append a comma at end
-                sql += ";";
+                string sql = "INSERT INTO Invoice_Item_Relation (Item_ID, Invoice_ID) VALUES ";
+                sql += "('";
+                sql += item.ItemID;
+                sql += "', '";
+                sql += invoiceID;
+                sql += "')";
 
                 return sql;
             } 
