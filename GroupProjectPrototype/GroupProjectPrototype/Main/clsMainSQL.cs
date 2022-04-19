@@ -237,7 +237,8 @@ namespace GroupProjectPrototype.Main
             {
                 return "UPDATE Invoices " +
                        "SET Total_Cost = " + tCost +
-                       ", Sell_Date = " + sDate;
+                       ", Sell_Date = '" + sDate +
+                       "' WHERE Invoice_ID = " + ID;
             } 
             catch (Exception ex)
             {

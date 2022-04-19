@@ -87,7 +87,7 @@ namespace GroupProjectPrototype
         /// Holds in passed ID
         /// </summary>
         public string invoiceID;
-
+        
         // Make sure to delete bin and maybe obj before committing
 
         #region Default Constructor 
@@ -104,7 +104,6 @@ namespace GroupProjectPrototype
                 numItems = 0;
 
                 selectedDate.DisplayDate = DateTime.Now.AddDays(-1);
-                sDate = selectedDate.DisplayDate.ToShortDateString();
 
                 // Create a new mainLogic object
                 mLogic = new clsMainLogic();
@@ -350,7 +349,8 @@ namespace GroupProjectPrototype
                 numItems = clsBigBoxOfScaryThings.numItems;
                 numItemsLbl.Content = Convert.ToString(numItems);
 
-                sDate = clsBigBoxOfScaryThings.SelDate;
+                // Update the date
+                selectedDate.SelectedDate = DateTime.Parse(clsBigBoxOfScaryThings.SelDate);
 
             } 
             catch (Exception ex)
@@ -543,6 +543,9 @@ namespace GroupProjectPrototype
                 {
                     return;
                 }
+
+                // This it the final date they selected
+                sDate = selectedDate.DisplayDate.ToShortDateString();
 
                 // Checks if user is on edit mode
                 if (!isEdit)
