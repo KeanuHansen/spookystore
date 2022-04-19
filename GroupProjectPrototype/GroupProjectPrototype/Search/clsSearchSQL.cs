@@ -18,7 +18,12 @@ namespace GroupProjectPrototype.Search
             {
                 try
                 {
-                    string sql = String.Format("SELECT Invoice_ID, Total_Cost, Sell_Date FROM Invoices WHERE ");
+                    string sql = String.Format("SELECT Invoice_ID, Total_Cost, Sell_Date FROM Invoices ");
+
+                    if(invoice != "" || cost != "" || date != "")
+                    {
+                        sql += String.Format(" WHERE ");
+                    }
 
                     if(invoice != "")
                     {

@@ -47,6 +47,37 @@ namespace GroupProjectPrototype
 
             // Add the Invoice Total Cost's
             invoiceTotalCharge.ItemsSource = objectSQL.GetTotalCost();
+
+            // Initially display all the data
+
+            // Filter based on what it has, and save it to a list to append to the data on the screen.
+            var list = objectSQL.Filter("","","");
+
+            // Append the list to the data grid.
+            ItemDatagrid.ItemsSource = list;
+
+            // Create 4 Columns to be displayed in the Datagrid
+            DataGridTextColumn column1 = new DataGridTextColumn();
+            DataGridTextColumn column2 = new DataGridTextColumn();
+            DataGridTextColumn column3 = new DataGridTextColumn();
+
+            // Set the properties of the columns
+            column1.Header = "Invoice ID";
+            column1.Binding = new Binding("InvoiceID");
+
+            column2.Header = "Total Cost";
+            column2.Binding = new Binding("TotalCost");
+
+            column3.Header = "Sell Date";
+            column3.Binding = new Binding("SellDate");
+
+            // Add the columns to the datagrid
+            ItemDatagrid.Columns.Add(column1);
+            ItemDatagrid.Columns.Add(column2);
+            ItemDatagrid.Columns.Add(column3);
+
+            // Don't generate columns automatically
+            ItemDatagrid.AutoGenerateColumns = false;
         }
 
         /// <summary>
@@ -59,6 +90,7 @@ namespace GroupProjectPrototype
             try
             {
                 ItemDatagrid.ItemsSource = null;
+                ItemDatagrid.Columns.Clear();
 
                 // Redo this, but make it so it can do one of many queries.
 
@@ -147,6 +179,7 @@ namespace GroupProjectPrototype
             {
                 // Clear all the items in the datagrid
                 ItemDatagrid.ItemsSource = null;
+                ItemDatagrid.Columns.Clear();
 
                 // Clear all the search values
                 invoiceDate.SelectedDate = null;
@@ -155,6 +188,35 @@ namespace GroupProjectPrototype
 
                 // Set the ID to null
                 SelectedID = null;
+
+                // Filter based on what it has, and save it to a list to append to the data on the screen.
+                var list = objectSQL.Filter("", "", "");
+
+                // Append the list to the data grid.
+                ItemDatagrid.ItemsSource = list;
+
+                // Create 4 Columns to be displayed in the Datagrid
+                DataGridTextColumn column1 = new DataGridTextColumn();
+                DataGridTextColumn column2 = new DataGridTextColumn();
+                DataGridTextColumn column3 = new DataGridTextColumn();
+
+                // Set the properties of the columns
+                column1.Header = "Invoice ID";
+                column1.Binding = new Binding("InvoiceID");
+
+                column2.Header = "Total Cost";
+                column2.Binding = new Binding("TotalCost");
+
+                column3.Header = "Sell Date";
+                column3.Binding = new Binding("SellDate");
+
+                // Add the columns to the datagrid
+                ItemDatagrid.Columns.Add(column1);
+                ItemDatagrid.Columns.Add(column2);
+                ItemDatagrid.Columns.Add(column3);
+
+                // Don't generate columns automatically
+                ItemDatagrid.AutoGenerateColumns = false;
 
             }
             catch (Exception ex)
@@ -222,7 +284,11 @@ namespace GroupProjectPrototype
             {
                 // Change the option to the SelectedID up top.
                 var item = ((clsInvoice)ItemDatagrid.SelectedItem);
-                SelectedID = item.InvoiceID;
+
+                if(item != null)
+                {
+                    SelectedID = item.InvoiceID;
+                }
             }
             catch (Exception ex)
             {
