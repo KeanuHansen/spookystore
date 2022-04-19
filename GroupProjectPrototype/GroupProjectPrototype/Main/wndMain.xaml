@@ -18,7 +18,7 @@
 
         <Canvas Name="itemsManager" Height="284" Canvas.Left="65" Canvas.Top="121" Width="572" Visibility="Visible">
             <DataGrid Name="invoiceDG" Height="117" Canvas.Left="20" Canvas.Top="25" Width="532"/>
-            <DatePicker Canvas.Left="50" Canvas.Top="245"/>
+            <DatePicker Name="selectedDate" Canvas.Left="50" Canvas.Top="245"/>
             <Label Content="View Item: " HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="31" Canvas.Top="150"/>
             <Label Content="Number of Items:" Canvas.Left="427" Canvas.Top="212"/>
             <Label Content="" Name="numItemsLbl" Canvas.Left="535" Canvas.Top="212"/>
@@ -28,7 +28,7 @@
             <ComboBox Name="cbitemList" Canvas.Left="100" Canvas.Top="153" Width="120" SelectionChanged="cbitemList_SelectionChanged"/>
             <Button Name="SaveInvoice" Content="Save Invoice" Canvas.Left="227" Canvas.Top="245" Width="84" Click="SaveInvoice_Click"/>
             <TextBox Name="itemCost" Height="23" Canvas.Left="238" TextWrapping="Wrap" Text="" Canvas.Top="153" Width="62" IsReadOnly="True"/>
-            <Button Content="Delete Item" Canvas.Left="455" Canvas.Top="153" Width="75"/>
+            <Button Name="DeleteBtn" Content="Delete Item" Canvas.Left="455" Canvas.Top="153" Width="75" Click="DeleteBtn_Click"/>
             <TextBlock Name="itemDesc" Canvas.Left="50" TextWrapping="Wrap" Text="" Canvas.Top="199"/>
         </Canvas>
         <Label Name="emptyLbl" Content="" Canvas.Left="219" Canvas.Top="37" Foreground="Red"/>

@@ -41,7 +41,6 @@ namespace GroupProjectPrototype
         /// <summary>
         /// Holds in added items from the user
         /// </summary>
-        //clsScaryThing newItem;
         clsBusinessItem newItem;
 
         /// <summary>
@@ -60,14 +59,24 @@ namespace GroupProjectPrototype
         public double totalCost;
 
         /// <summary>
+        /// Make a copy of total cost
+        /// </summary>
+        public double copyTotalCost;
+
+        /// <summary>
         /// Keeps track of how many items are in the invoice
         /// </summary>
         public int numItems;
 
         /// <summary>
+        /// Make a copy of total cost
+        /// </summary>
+        public int copyNumItems;
+
+        /// <summary>
         /// Keep track of selected date
         /// </summary>
-        public DateTime selectedDate;
+        public string sDate;
 
         /// <summary>
         /// Checks if user hit the save button
@@ -75,7 +84,7 @@ namespace GroupProjectPrototype
         public bool isEdit;
 
         /// <summary>
-        /// Holds in passed ID from search window
+        /// Holds in passed ID
         /// </summary>
         public string invoiceID;
 
@@ -89,35 +98,55 @@ namespace GroupProjectPrototype
                 InitializeComponent();
                 Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
 
-
                 // Initialize cost, isEdit, and number of items
                 totalCost = 0;
                 isEdit = false;
                 numItems = 0;
 
-                // Set the day to current day
-                selectedDate = DateTime.Now;                
+                selectedDate.DisplayDate = DateTime.Now.AddDays(-1);
+                sDate = selectedDate.DisplayDate.ToShortDateString();
 
                 // Create a new mainLogic object
                 mLogic = new clsMainLogic();
 
-                // Create a new item object
-                //newItem = new clsScaryThing();
-               // newItem = new clsBusinessItem();
-
-               bList = new BindingList<clsBusinessItem>();
+                bList = new BindingList<clsBusinessItem>();
 
                 // Create a new list object
                 itemList = new clsBigBoxOfScaryThings();
-
-                // Create a new business item list object
-                //bList = new clsBusinessList();
 
                 // Disable edit, delete buttons, and items manager portion
                 UIhandler(true, false, true, false, false);
 
                 // Load items into combobox by binding it
                 cbitemList.ItemsSource = clsBigBoxOfScaryThings.GetBusinessItems();
+
+                // Create 4 Columns to be displayed in the Datagrid
+                DataGridTextColumn column1 = new DataGridTextColumn();
+                DataGridTextColumn column2 = new DataGridTextColumn();
+                DataGridTextColumn column3 = new DataGridTextColumn();
+                DataGridTextColumn column4 = new DataGridTextColumn();
+
+                // Set the properties of the columns
+                column1.Header = "Item ID";
+                column1.Binding = new Binding("ItemID");
+
+                column2.Header = "Item Name";
+                column2.Binding = new Binding("ItemName");
+
+                column3.Header = "Item Description";
+                column3.Binding = new Binding("ItemDescription");
+
+                column4.Header = "Cost";
+                column4.Binding = new Binding("Cost");
+
+                // Add the columns to the datagrid
+                invoiceDG.Columns.Add(column1);
+                invoiceDG.Columns.Add(column2);
+                invoiceDG.Columns.Add(column3);
+                invoiceDG.Columns.Add(column4);
+
+                // Don't generate columns automatically
+                invoiceDG.AutoGenerateColumns = false;                
 
             } catch (Exception ex)
             {
@@ -128,7 +157,7 @@ namespace GroupProjectPrototype
         }
         #endregion
 
-        // Needs work
+        // Finished
         #region Create Invoice
         /// <summary>
         /// Allows user to create a new invoice
@@ -146,12 +175,7 @@ namespace GroupProjectPrototype
                 invoiceLbl.Content = "TBD";
 
                 // Enable items manager, disable the create btn & menu
-                UIhandler(false, true, false, false, false );
-
-                // Dont allow user to save invoice till they've added one item - use if statement
-                //SaveInvoice.IsEnabled = false;
-
-
+                UIhandler(false, true, false, false, false);
             }
             catch (Exception ex)
             {
@@ -162,7 +186,7 @@ namespace GroupProjectPrototype
         }
         #endregion
 
-        // Needs work
+        // Finished
         #region Edit Invoice
         /// <summary>
         /// Allows user to edit invoice once they created one or searched it up
@@ -178,7 +202,6 @@ namespace GroupProjectPrototype
 
                 // Disable the buttons & menu
                 UIhandler(false, true, false, false, false);
-
             } 
             catch (Exception ex)
             {
@@ -189,7 +212,7 @@ namespace GroupProjectPrototype
         }
         #endregion
 
-        // Finished?
+        // Needs work
         #region Delete Invoice
         /// <summary>
         /// Allows user to delete invoice once they created one or is searched up
@@ -200,11 +223,17 @@ namespace GroupProjectPrototype
         {
             try
             {
+                // Delete the items list
+                bList.Clear();
+
                 // Call function to delete the invoice
-                //mLogic.deleteInvoice(invoiceLbl.Content.ToString());
+                mLogic.deleteInvoice(bList, invoiceLbl.Content.ToString());
+
+                // Change to false since save invoice intiallay turned this to true
+                isEdit = false;
 
                 // Refresh the datagrid
-                invoiceDG.RowStyle = null;
+                invoiceDG.ItemsSource = null;
 
                 // Clear out labels
                 invoiceLbl.Content = "";
@@ -214,18 +243,15 @@ namespace GroupProjectPrototype
                 // "Reset" Date and Textbox
                 itemCost.Text = "";
                 itemDesc.Text = "";
-                selectedDate = DateTime.Now;
+                //selectedDate = DateTime.Now;
                 cbitemList.SelectedItem = null;
 
                 // Reset the totals
                 totalCost = 0;
                 numItems = 0;
 
-
                 // Enable menu & create btn
                 UIhandler(true, false, true, false, false );
-
-
             } 
             catch (Exception ex)
             {
@@ -236,7 +262,7 @@ namespace GroupProjectPrototype
         }
         #endregion
 
-        // Finished?
+        // Finished
         #region Update Items
         /// <summary>
         /// Allows user to update items for their business
@@ -265,7 +291,7 @@ namespace GroupProjectPrototype
         }
         #endregion
 
-        // Needs work
+        // Finished
         #region Search Invoice
         /// <summary>
         /// Allows user to search for an invoice
@@ -283,7 +309,6 @@ namespace GroupProjectPrototype
                 if (mLogic.isEmpty())
                 {
                     /*Nothing is in our DB*/
-                    // Update label
                     emptyLbl.Content = "There are no invoices to look up!";
                     return;
                 }
@@ -296,22 +321,32 @@ namespace GroupProjectPrototype
 
                 /*Once Keanu's window is closed, we get back here*/
 
+                // Check if user canceled out of the window
+                if(wndSearch.SelectedID is null)
+                {
+                    return;
+                }
+
+                // Disable create invoice btn & menu and enable edit & delete btns
+                UIhandler(false, true, false, true, true);
+
                 // Save the InvoiceID from the search window
                 invoiceID = wndSearch.SelectedID;
 
                 // Update the invoice label
                 invoiceLbl.Content = invoiceID;
 
-                // Pass in ID to function that will return us the invoice list
                 // Bind that list to the datagrid
-                //clsBigBoxOfScaryThings.bigBox(invoiceID);
+                invoiceDG.ItemsSource = clsBigBoxOfScaryThings.getInvoiceItems(invoiceID);
 
+                //Update Selected date, Total cost, and number of items
+                totalCost = Convert.ToDouble(clsBigBoxOfScaryThings.TotalCost);
+                costLbl.Content = totalCost;
 
+                numItems = clsBigBoxOfScaryThings.numItems;
+                numItemsLbl.Content = Convert.ToString(numItems);
 
-                // Disable create invoice btn & menu and enable edit & delete btns
-                UIhandler(false, true, false, true, true);
-
-
+                sDate = clsBigBoxOfScaryThings.SelDate;
 
             } 
             catch (Exception ex)
@@ -334,13 +369,15 @@ namespace GroupProjectPrototype
         {
             try
             {
+                // Do Nothing if there is no selected item
                 if (cbitemList.SelectedItem is null)
                 {
                     return;
                 }
+
                 // Update Textbox
-                itemCost.Text = "$" + ((clsBusinessItem)cbitemList.SelectedItem).cost.ToString();
-                itemDesc.Text = ((clsBusinessItem)cbitemList.SelectedItem).itemDescription.ToString();
+                itemCost.Text = "$" + ((clsBusinessItem)cbitemList.SelectedItem).Cost.ToString();
+                itemDesc.Text = ((clsBusinessItem)cbitemList.SelectedItem).ItemDescription.ToString();
             } 
             catch (Exception ex)
             {
@@ -351,7 +388,7 @@ namespace GroupProjectPrototype
         }
         #endregion
 
-        // Needs Work
+        // Finished
         #region Add Item
         /// <summary>
         /// Allows user to add item to their invoice
@@ -362,6 +399,7 @@ namespace GroupProjectPrototype
         {
             try
             {
+                // If theres nothing selected in combobox, do nothing
                 if (cbitemList.SelectedItem is null)
                 {
                     return;
@@ -373,20 +411,34 @@ namespace GroupProjectPrototype
                 bList.Add(newItem);
 
                 // Update the datagrid
-                invoiceDG.DataContext = bList;
+                invoiceDG.ItemsSource = bList;
 
-                // Update the total cost
-                totalCost += Convert.ToDouble(newItem.cost);
+                // They're currently not editing the invoice
+                if (!isEdit)
+                {
+                    // Update the total cost
+                    totalCost += Convert.ToDouble(newItem.Cost);
 
-                // Update the total cost label
-                costLbl.Content = totalCost.ToString();
+                    // Update the total cost label
+                    costLbl.Content = totalCost.ToString();
 
-                // Increment number of items
-                numItems++;
+                    // Increment number of items
+                    numItems++;
 
-                // Update number of items label
-                numItemsLbl.Content = numItems.ToString();
+                    // Update number of items label
+                    numItemsLbl.Content = numItems.ToString();
+                }
+                else
+                {
+                    // Update the copied total cost
+                    copyTotalCost += Convert.ToDouble(newItem.Cost);
+                    costLbl.Content = copyTotalCost.ToString();
 
+                    // Update the copied number of items
+                    copyNumItems++;
+                    numItemsLbl.Content = copyNumItems.ToString();
+
+                }
             } 
             catch (Exception ex)
             {
@@ -397,7 +449,81 @@ namespace GroupProjectPrototype
         }
         #endregion
 
-        //Needs Work
+        // Finished
+        #region Delete Item
+        /// <summary>
+        /// Allows user to delete item from datagrid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // Prevent user from deleting if they haven't selected anything in datagrid or the datagrid is empty
+                if (invoiceDG.SelectedItem is null || numItems == 0)
+                {
+                    return;
+                }
+
+                // User is currently not editing the invoice
+                if (!isEdit)
+                {
+                    // Decrement number of items and update the label
+                    numItems--;
+                    numItemsLbl.Content = numItems.ToString();
+
+                    // There is sum issues with subracting doubles
+                    if (numItems == 0)
+                    {
+                        totalCost = 0;
+                    }
+                    else
+                    {
+                        // Decrement total cost and number of items
+                        totalCost -= Convert.ToDouble(((clsBusinessItem)invoiceDG.SelectedItem).Cost);
+                    }
+
+                    // Update the total cost label
+                    costLbl.Content = totalCost.ToString();
+                }
+                else
+                {
+                    // Decrement copied number of items and update the label
+                    copyNumItems--;
+                    numItemsLbl.Content = copyNumItems.ToString();
+
+                    // There is sum issues w/ subracting doubles
+                    if(copyNumItems == 0)
+                    {
+                        copyTotalCost = 0;
+                    }
+                    else
+                    {
+                        copyTotalCost -= Convert.ToDouble(((clsBusinessItem)invoiceDG.SelectedItem).Cost);
+                    }
+
+                    // Update the total cost label
+                    costLbl.Content = copyTotalCost.ToString();
+                }
+
+                // Remove the item from the items list and datagrid
+                bList.Remove((clsBusinessItem)invoiceDG.SelectedItem);
+
+                // Prevents multiple deletes in one hit
+                invoiceDG.SelectedItem = null;
+
+            }
+            catch (Exception ex)
+            {
+                // Handle the error in top level method calls.
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                    MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+        #endregion
+
+        //Issues adding items to relation table
         #region Save Invoice
         /// <summary>
         /// Saves invoice to the database
@@ -408,38 +534,76 @@ namespace GroupProjectPrototype
         {
             try
             {
-                // Checks if user is on edit mode
-                if (isEdit)
+                // Prevent user from saving invoice if no items are added
+                if(invoiceDG.ItemsSource is null || numItems == 0)
                 {
-                    // The user is on edit mode
-                    UIhandler(true, false, true, false, false);
-                    // Set back to false 
-                    isEdit = false;
+                    return;
                 }
-                else
+
+                // Checks if user is on edit mode
+                if (!isEdit)
                 {
+                    /* User Saved the invoice for the first time */
+                    //mLogic.addInvoice(bList, Convert.ToString(totalCost), sDate);
+
+                    // Retrieve the ID main logic class
+                    invoiceID = mLogic.invoiceID;
+
+                    // Update the ID label
+                    invoiceLbl.Content = invoiceID;
+
+                    // Change is edit to true
+                    isEdit = true;
+
+                    // Create copy of total num of items and total cost
+                    copyTotalCost = totalCost;
+                    copyNumItems = numItems;
+
                     // Only enables items manager, edit, and delete btn
                     UIhandler(false, false, false, true, true);
                 }
+                else
+                {
+                    // Prevents user if there are no items in edit mode
+                    if (copyNumItems == 0 || invoiceDG.ItemsSource is null)
+                    {
+                        return;
+                    }
 
-                // Pass in information to function to save to database
+
+                    // The user is on edit mode
+                    UIhandler(true, false, true, false, false);
 
 
-                // Reset the label after user submitted or updated invoice
-                invoiceLbl.Content = "";
-                costLbl.Content = "";
-                numItemsLbl.Content = "";
+                    // Check  if there were any changes
+                    // If not, Update the database
+                    if ((totalCost != copyTotalCost) || (numItems != copyNumItems))
+                    {
+                        // Update the database
+                        //isEdit = false; ////// DELETE THIS!!!
+                    }
+                    ////////////////////////////////////////////////////
+                    // Clear out labels
+                    invoiceLbl.Content = "";
+                    costLbl.Content = "";
+                    numItemsLbl.Content = "";
 
-                // "Reset" Date, Textbox, and combobox
-                itemCost.Text = "";
-                selectedDate = DateTime.Now;
-                cbitemList.SelectedItem = null;
-                itemDesc.Text = "";
+                    // "Reset" Date, Textbox, and combobox
+                    itemCost.Text = "";
+                    itemDesc.Text = "";
+                    //selectedDate = DateTime.Now;
+                    cbitemList.SelectedItem = null;
 
-                // Reset the totals
-                totalCost = 0;
-                numItems = 0;
+                    // Reset the totals
+                    totalCost = 0;
+                    numItems = 0;
 
+                    // Clear out the list 
+                    bList.Clear();
+
+                    // Set back to false 
+                    isEdit = false;
+                }
             } 
             catch (Exception ex)
             {

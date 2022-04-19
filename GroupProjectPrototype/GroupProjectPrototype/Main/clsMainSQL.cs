@@ -15,6 +15,7 @@ namespace GroupProjectPrototype.Main
     class clsMainSQL
     {
         
+        // Finished
         #region All Invoices
         /// <summary>
         /// Statement that returns all rows from the Invoices Table
@@ -34,6 +35,7 @@ namespace GroupProjectPrototype.Main
         }
         #endregion
 
+        // Finished
         #region Retrieve Business Items
         /// <summary>
         /// Statement that returns all business items
@@ -53,6 +55,7 @@ namespace GroupProjectPrototype.Main
         }
         #endregion
 
+        // Finished
         #region Retrieve Invoice Items
         /// <summary>
         /// Statement that returns the items based on ID
@@ -63,10 +66,11 @@ namespace GroupProjectPrototype.Main
         {
             try
             {
-                return "Select " +
-                       " FROM Invoices IN, Invoice_Item_Relation IR, Items I" +
-                       " WHERE IN.Invoice_ID = "
-                    ;
+                return "SELECT I.Item_ID, I.Item_Name, I.Item_Description, I.Cost " +
+                       " FROM Invoices IN " +
+                       " JOIN Invoice_Item_Relation IR ON IR.Invoice_ID = IN.Invoice_ID " +
+                       " JOIN Items I ON I.Item_ID = IR.Item_ID " +
+                       " WHERE IN.Invoice_ID = " + invoiceID;
             } catch 
             (Exception ex)
             {
@@ -74,20 +78,60 @@ namespace GroupProjectPrototype.Main
                     MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
         }
+        /// <summary>
+        /// Statement that returns total cost based on ID
+        /// </summary>
+        /// <param name="invoiceID"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public string getTotalCost(string invoiceID)
+        {
+            try
+            {
+                return "SELECT Total_COST " +
+                       "FROM Invoices " +
+                       "WHERE Invoice_ID = " + invoiceID;
+            } 
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Returns the selected date
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public string getDate(string invoiceID)
+        {
+            try
+            {
+                return "SELECT Sell_Date " +
+                       "FROM Invoices " +
+                       "WHERE Invoice_ID = " + invoiceID;
+            } 
+            catch(Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
         #endregion
 
-        // Needs work
+        // Finished
         #region Delete Invoice
         /// <summary>
         /// Statement that deletes the invoice link based in ID
         /// </summary>
         /// <returns></returns>
-        public string delLinkInvoice(string ID)
+        public string delLinkInvoice(BindingList<clsBusinessItem> itemList, string invoiceID)
         {
             try
             {
                 // This is wrong
-                return "DELETE FROM Invoice_Item_Relation WHERE Invoice_ID = " + ID;
+                return "DELETE FROM Invoice_Item_Relation WHERE Invoice_ID = " + invoiceID;
             } 
             catch (Exception ex)
             {
@@ -114,7 +158,6 @@ namespace GroupProjectPrototype.Main
                     MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
         }
-
         #endregion
 
         #region Add Invoice
@@ -127,18 +170,24 @@ namespace GroupProjectPrototype.Main
             try
             {
                 // I only need Item & Invoice ID
-                string sql = "INSERT INTO Invoice_Item_Relation (Item_ID, Invoice_ID)";
-                sql += "Values ";
+                string sql = "INSERT INTO Invoice_Item_Relation (Item_ID, Invoice_ID) ";
+                sql += "VALUES ";
 
                 // Loop through each item in list
                 foreach(clsBusinessItem item in itemsList)
                 {
                     sql += "(";
-                    sql += item.itemID + ", " + invoiceID;
+                    sql += "'" + item.ItemID + "', '" + invoiceID + "'";
                     sql += "), ";
                 }
 
-                //sql = sql.Trim;
+
+                // Trim off the extra comma & space
+                sql = sql.TrimEnd(' ');
+                sql = sql.TrimEnd(',');
+
+                // Append a comma at end
+                sql += ";";
 
                 return sql;
             } 
@@ -150,38 +199,63 @@ namespace GroupProjectPrototype.Main
         }
 
         /// <summary>
-        /// Statement that adds invoice to invoice table
+        /// Statement that adds Invoice to invoice table
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public string addInvoice(BindingList<clsBusinessItem> items, string invoiceID, DateTime selTime, string totalCost)
+        public string addInvoice(string totalCost, string selDate)
         {
             try
             {
-                return "";
-            } 
+                return "INSERT INTO Invoices (Total_Cost, Sell_Date)" +
+                       "VALUES( '" + totalCost + "', '" + selDate + "');";
+            }
             catch (Exception ex)
             {
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
-                                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Returns the max ID of the newly inserted Invoice
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public string maxID()
+        {
+            try
+            {
+                return "SELECT TOP 1 Invoice_ID" +
+                       " FROM Invoices " +
+                       "ORDER BY Invoice_ID DESC";
+            } 
+            catch(Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
         }
         #endregion
 
-
+        /// <summary>
+        /// Updates date and total cost based on invoice
+        /// </summary>
+        /// <returns></returns>
+        public string updateInvoice(string ID, string tCost, string sDate)
+        {
+            try
+            {
+                return "UPDATE Invoices " +
+                       "SET Total_Cost = " + tCost +
+                       ", Sell_Date = " + sDate;
+            } 
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
 
     } // end of class
 }
-/*		public string invoiceID { get; set; }
-		public string itemID { get; set; }
-		public string item { get; set; }
-		public DateTime sellDate { get; set; }
-		public string cost { get; set; }
-		public string description { get; set; }
-
-    I need:
-        total cost
-        item name
-        sell Date
-        invoice id? 
- */

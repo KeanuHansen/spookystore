@@ -1,6 +1,7 @@
 ﻿using GroupProjectPrototype.Main;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Reflection;
@@ -24,7 +25,10 @@ namespace GroupProjectPrototype
         /// </summary>
         clsMainSQL sSQL;
 
-        List<clsScaryThing> iList;
+        /// <summary>
+        /// Tracks the Invoice ID of created invoice. Pass this back to main wnd
+        /// </summary>
+        public string invoiceID;
 
         /// <summary>
         /// Default Constructor
@@ -34,7 +38,7 @@ namespace GroupProjectPrototype
             db = new clsDataAccess();
             sSQL = new clsMainSQL();
         }
-
+        // Finished
         #region Is DB Empty
         /// <summary>
         /// Checks if the database is empty
@@ -68,20 +72,22 @@ namespace GroupProjectPrototype
         }
         #endregion
 
+        // Finished
         #region Delete Invoice
         /// <summary>
         /// Delete the invoice from the database
         /// </summary>
         /// <param name="ID"></param>
-        public void deleteInvoice(string ID)
+        public void deleteInvoice(BindingList<clsBusinessItem> itemList, string ID)
         {
             try
             {
                 // Deletes invoice from Link table
-                db.ExecuteNonQuery(sSQL.delLinkInvoice(ID));
+                db.ExecuteNonQuery(sSQL.delLinkInvoice(itemList, ID));
 
                 // Deletes invoice from Invoices table
                 db.ExecuteNonQuery(sSQL.delInvoice(ID));
+
             } 
             catch (Exception ex)
             {
@@ -90,6 +96,58 @@ namespace GroupProjectPrototype
             }
         }
         #endregion
+
+        #region Add Invoice
+        /// <summary>
+        /// Adds the invoice to the database
+        /// </summary>
+        /// <exception cref="Exception"></exception>
+        public void addInvoice(BindingList<clsBusinessItem> itemsList, string totalCost, string selDate)
+        {
+            try
+            {
+                // Add Invoice to Invoices table
+                db.ExecuteNonQuery(sSQL.addInvoice(totalCost, selDate));
+
+                // Retrieve the new ID
+                invoiceID = db.ExecuteScalarSQL(sSQL.maxID());
+
+                // Add Items to relation table
+                db.ExecuteNonQuery(sSQL.addInvoiceLink(itemsList, invoiceID));
+
+            } 
+            catch(Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+        #endregion
+
+        /// <summary>
+        /// Updates Selected invoice based on invoice ID
+        /// </summary>
+        /// <exception cref="Exception"></exception>
+        public void updateInvoice(BindingList<clsBusinessItem> itemsList, string totalCost, string selDate, string iID)
+        {
+            try
+            {
+                // Update total cost and date from Invoice table
+                db.ExecuteNonQuery(sSQL.updateInvoice(iID, totalCost, selDate));
+
+                // Delete everything in the relation table
+                db.ExecuteNonQuery(sSQL.delLinkInvoice(itemsList, iID));
+
+                // Add Items to relation table
+                db.ExecuteNonQuery(sSQL.addInvoiceLink(itemsList, iID));
+            } 
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+
 
     } // end of class
 }

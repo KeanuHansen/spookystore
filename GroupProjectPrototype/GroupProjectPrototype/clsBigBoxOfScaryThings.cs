@@ -16,17 +16,34 @@ namespace GroupProjectPrototype
 		/// <summary>
 		/// List that will hold items based on ID
 		/// </summary>
-		public static List<clsScaryThing> bigBox;
+		public static List<clsBusinessItem> bigBox;
 
 		/// <summary>
 		/// List that will hold business items
 		/// </summary>
 		public static List<clsBusinessItem> bList;
 
+		/// <summary>
+		/// Allows main window to retreive the selected date from query
+		/// </summary>
+		public static string SelDate;
 
+		/// <summary>
+		/// Allows main window to retrieve the total cost from query
+		/// </summary>
+		public static string TotalCost;
+
+		public static int numItems;
+
+		/* NOTE: selDate, TotalCost, and numItems are based on ID passed in getInvoiceItems() 
+		   Be cautious of that */
+
+		/// <summary>
+		/// Defualt Constructor
+		/// </summary>
 		public clsBigBoxOfScaryThings()
         {
-			bigBox = new List<clsScaryThing>();
+			bigBox = new List<clsBusinessItem>();
 			bList = new List<clsBusinessItem>();
         }
 
@@ -81,7 +98,7 @@ namespace GroupProjectPrototype
 		/// Retrieves all items based on invoice ID
 		/// </summary>
 		/// <returns></returns>
-		public List<clsScaryThing> getInvoiceItems(string invoiceID)
+		public static List<clsBusinessItem> getInvoiceItems(string invoiceID)
         {
             try
             {
@@ -91,23 +108,29 @@ namespace GroupProjectPrototype
 				DataSet ds = new DataSet();
 
 				// Create a new list each time this method is called
-				bigBox = new List<clsScaryThing>();
+				bigBox = new List<clsBusinessItem>();
 
 				// Create SQL object within static method
 				clsDataAccess db = new clsDataAccess();
 
-				// Number of returned rows from query 
-				int retVal = 0;
+/*				// Number of returned rows from query 
+				int retVal = 0;*/
+				
+				// Update the selected date
+				SelDate = db.ExecuteScalarSQL(sSQL.getDate(invoiceID));
+
+				// Update the selected total cost
+				TotalCost = db.ExecuteScalarSQL(sSQL.getTotalCost(invoiceID));
 
 				// Execute Query
-				ds = db.ExecuteSQLStatement(sSQL.getInvoiceItems(invoiceID), ref retVal);
+				ds = db.ExecuteSQLStatement(sSQL.getInvoiceItems(invoiceID), ref numItems);
 
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
 					// Create Scary item and add to bix box list
-					bigBox.Add(new clsScaryThing(
-							   Convert.ToString(dr[0]), Convert.ToString(dr[1]), (DateTime)dr[2],
-							   Convert.ToString( dr[3]), Convert.ToString(dr[4])));
+					bigBox.Add(new clsBusinessItem(
+							   Convert.ToString(dr[0]), Convert.ToString(dr[1]), 
+							   Convert.ToString(dr[2]), Convert.ToString(dr[3])));
                 }
 
 				return bigBox;
@@ -119,6 +142,7 @@ namespace GroupProjectPrototype
 					MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
 			}
         }
+
     } // end of class
 }
 
