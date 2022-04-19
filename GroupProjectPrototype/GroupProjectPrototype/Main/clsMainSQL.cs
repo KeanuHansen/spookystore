@@ -66,11 +66,17 @@ namespace GroupProjectPrototype.Main
         {
             try
             {
-                return "SELECT I.Item_ID, I.Item_Name, I.Item_Description, I.Cost " +
-                       " FROM Invoices IN " +
-                       " JOIN Invoice_Item_Relation IR ON IR.Invoice_ID = IN.Invoice_ID " +
-                       " JOIN Items I ON I.Item_ID = IR.Item_ID " +
-                       " WHERE IN.Invoice_ID = " + invoiceID;
+                string sql = String.Format("SELECT Items.Item_ID, Items.Item_Name, Items.Item_Description, Items.Cost ");
+                sql += String.Format("FROM Items ");
+                sql += String.Format("INNER JOIN Invoice_Item_Relation ON Invoice_Item_Relation.Item_ID = Items.Item_ID ");
+                sql += String.Format("WHERE Invoice_Item_Relation.Invoice_ID = {0} ", invoiceID);
+                return sql;
+
+                //return "SELECT I.Item_ID, I.Item_Name, I.Item_Description, I.Cost " +
+                //       " FROM Invoices IN " +
+                //       " JOIN Invoice_Item_Relation IR ON IR.Invoice_ID = IN.Invoice_ID " +
+                //       " JOIN Items I ON I.Item_ID = IR.Item_ID " +
+                //       " WHERE IN.Invoice_ID = " + invoiceID;
             } catch 
             (Exception ex)
             {
