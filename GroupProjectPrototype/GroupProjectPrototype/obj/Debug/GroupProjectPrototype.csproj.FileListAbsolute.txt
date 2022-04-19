@@ -56,3 +56,22 @@ C:\Users\keanu\Source\Repos\KeanuHansen\spookystore\GroupProjectPrototype\GroupP
 C:\Users\keanu\Source\Repos\KeanuHansen\spookystore\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\GroupProjectPrototype.exe
 C:\Users\keanu\Source\Repos\KeanuHansen\spookystore\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\GroupProjectPrototype.pdb
 C:\Users\keanu\source\repos\KeanuHansen\spookystore\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\GroupProjectPrototype.csprojAssemblyReference.cache
+C:\Users\sfmon\OneDrive\Documents\College\CS3280\Group Project\GroupProjectPrototype\GroupProjectPrototype\bin\Debug\GroupProjectPrototype.exe.config
+C:\Users\sfmon\OneDrive\Documents\College\CS3280\Group Project\GroupProjectPrototype\GroupProjectPrototype\bin\Debug\GroupProjectPrototype.exe
+C:\Users\sfmon\OneDrive\Documents\College\CS3280\Group Project\GroupProjectPrototype\GroupProjectPrototype\bin\Debug\GroupProjectPrototype.pdb
+C:\Users\sfmon\OneDrive\Documents\College\CS3280\Group Project\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\GroupProjectPrototype.csprojAssemblyReference.cache
+C:\Users\sfmon\OneDrive\Documents\College\CS3280\Group Project\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\Items\wndItems.g.cs
+C:\Users\sfmon\OneDrive\Documents\College\CS3280\Group Project\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\Main\wndMain.g.cs
+C:\Users\sfmon\OneDrive\Documents\College\CS3280\Group Project\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\Search\wndSearch.g.cs
+C:\Users\sfmon\OneDrive\Documents\College\CS3280\Group Project\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\App.g.cs
+C:\Users\sfmon\OneDrive\Documents\College\CS3280\Group Project\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\GroupProjectPrototype_MarkupCompile.cache
+C:\Users\sfmon\OneDrive\Documents\College\CS3280\Group Project\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\GroupProjectPrototype_MarkupCompile.lref
+C:\Users\sfmon\OneDrive\Documents\College\CS3280\Group Project\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\Items\wndItems.baml
+C:\Users\sfmon\OneDrive\Documents\College\CS3280\Group Project\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\Main\wndMain.baml
+C:\Users\sfmon\OneDrive\Documents\College\CS3280\Group Project\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\Search\wndSearch.baml
+C:\Users\sfmon\OneDrive\Documents\College\CS3280\Group Project\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\GroupProjectPrototype.g.resources
+C:\Users\sfmon\OneDrive\Documents\College\CS3280\Group Project\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\GroupProjectPrototype.Properties.Resources.resources
+C:\Users\sfmon\OneDrive\Documents\College\CS3280\Group Project\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\GroupProjectPrototype.csproj.GenerateResource.cache
+C:\Users\sfmon\OneDrive\Documents\College\CS3280\Group Project\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\GroupProjectPrototype.csproj.CoreCompileInputs.cache
+C:\Users\sfmon\OneDrive\Documents\College\CS3280\Group Project\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\GroupProjectPrototype.exe
+C:\Users\sfmon\OneDrive\Documents\College\CS3280\Group Project\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\GroupProjectPrototype.pdb

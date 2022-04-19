@@ -1,4 +1,5 @@
-﻿using GroupProjectPrototype.Search;
+﻿
+using GroupProjectPrototype.Search;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -85,14 +86,9 @@ namespace GroupProjectPrototype
                 int rows = 0;
                 ds = itemManage.ExecuteSQLStatement(itemSQL.checkInvoices(), ref rows);
 
-                if(rows == 0) //if true, then that means this item isnt on any invoices, then it can be deleted
-                {
-                    itemManage.ExecuteNonQuery(itemSQL.deleteItem()); //deletes the item.
-                }
-                else
-                {
-                    //sends error message
-                }
+                itemManage.ExecuteNonQuery(itemSQL.deleteItem()); //deletes the item.
+
+
             }
             catch (Exception ex)
             {
@@ -137,13 +133,109 @@ namespace GroupProjectPrototype
         }
 
         /// <summary>
+        /// changes the name of the item
+        /// </summary>
+        /// <param name="newName"></param>
+        public void changeName(string newName)
+        {
+            try
+            {
+                itemManage.ExecuteNonQuery(itemSQL.editName(newName));
+            }
+            catch (Exception ex)
+            {
+                // Calling methods need to throw the exception with meaningful information.
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+
+        /// <summary>
         /// adds new item to the database
         /// </summary>
         public void addNewItem(string name, string description, double cost)
         {
             try
             {
-                itemManage.ExecuteNonQuery(itemSQL.addItem(name, cost, description));
+                int retVal = 0;
+                itemManage.ExecuteSQLStatement(itemSQL.checkDoubleItem(name), ref retVal);
+
+                if (retVal == 0)
+                {
+                    itemManage.ExecuteNonQuery(itemSQL.addItem(name, cost, description));
+                }
+
+            }
+            catch (Exception ex)
+            {
+                // Calling methods need to throw the exception with meaningful information.
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// returns the item name
+        /// </summary>
+        /// <returns></returns>
+        public string getItemName()
+        {
+            try
+            {
+                int retVal = 0;
+                string name = "";
+
+                ds = itemManage.ExecuteSQLStatement(itemSQL.getItemName(), ref retVal);
+                name = ds.Tables[0].Rows[0][0].ToString();
+
+                return name;
+
+            }
+            catch (Exception ex)
+            {
+                // Calling methods need to throw the exception with meaningful information.
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+        /// <summary>
+        /// returns the cost of the item
+        /// </summary>
+        /// <returns></returns>
+
+        public double getCost()
+        {
+            try
+            {
+                int retVal = 0;
+                double cost = 0.0;
+
+                ds = itemManage.ExecuteSQLStatement(itemSQL.getItemCost(), ref retVal);
+                cost = Convert.ToDouble(ds.Tables[0].Rows[0][0]);
+
+                return cost;
+
+            }
+            catch (Exception ex)
+            {
+                // Calling methods need to throw the exception with meaningful information.
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// returns the items description
+        /// </summary>
+        /// <returns></returns>
+        public string getDescription()
+        {
+            try
+            {
+                int retVal = 0;
+                string des = "";
+
+                ds = itemManage.ExecuteSQLStatement(itemSQL.getItemDes(), ref retVal);
+                des = ds.Tables[0].Rows[0][0].ToString();
+
+                return des;
+
             }
             catch (Exception ex)
             {
