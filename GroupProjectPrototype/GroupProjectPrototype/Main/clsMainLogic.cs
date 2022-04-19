@@ -145,9 +145,6 @@ namespace GroupProjectPrototype
                 // Delete everything in the relation table
                 db.ExecuteNonQuery(sSQL.delLinkInvoice(itemsList, iID));
 
-                // Add Items to relation table
-                //db.ExecuteNonQuery(sSQL.addInvoiceLink(itemsList, iID));
-
                 // Loop through each item in the list
                 foreach (clsBusinessItem item in itemsList)
                 {

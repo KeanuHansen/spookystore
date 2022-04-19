@@ -112,9 +112,6 @@ namespace GroupProjectPrototype
 
 				// Create SQL object within static method
 				clsDataAccess db = new clsDataAccess();
-
-/*				// Number of returned rows from query 
-				int retVal = 0;*/
 				
 				// Update the selected date
 				SelDate = db.ExecuteScalarSQL(sSQL.getDate(invoiceID));
