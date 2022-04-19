@@ -55,3 +55,4 @@ C:\Users\keanu\Source\Repos\KeanuHansen\spookystore\GroupProjectPrototype\GroupP
 C:\Users\keanu\Source\Repos\KeanuHansen\spookystore\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\GroupProjectPrototype.exe
 C:\Users\keanu\Source\Repos\KeanuHansen\spookystore\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\GroupProjectPrototype.pdb
 C:\Users\keanu\Source\Repos\KeanuHansen\spookystore\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\GroupProjectPrototype.csprojAssemblyReference.cache
+C:\Users\keanu\Source\Repos\KeanuHansen\spookystore\GroupProjectPrototype\GroupProjectPrototype\obj\Debug\Items\wndItems.baml

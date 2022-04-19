@@ -58,6 +58,8 @@ namespace GroupProjectPrototype
         {
             try
             {
+                ItemDatagrid.ItemsSource = null;
+
                 // Redo this, but make it so it can do one of many queries.
 
                 // Have three query / four query options, based on the selection.
@@ -144,10 +146,15 @@ namespace GroupProjectPrototype
             try
             {
                 // Clear all the items in the datagrid
+                ItemDatagrid.ItemsSource = null;
 
                 // Clear all the search values
+                invoiceDate.SelectedDate = null;
+                invoiceNum.SelectedItem = null;
+                invoiceTotalCharge.SelectedItem = null;
 
                 // Set the ID to null
+                SelectedID = null;
 
             }
             catch (Exception ex)
