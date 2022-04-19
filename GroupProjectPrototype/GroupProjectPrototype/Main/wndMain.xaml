@@ -8,59 +8,31 @@
         Title="MainWindow" Height="450" Width="800">
     <Canvas>
         <Label Content="Cursed Item Shop" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Menu Height="22" Canvas.Left="119" Canvas.Top="15" Width="518">
-            <MenuItem x:Name="Items" Header="_Items" Click="Items_Click"/>
+        <Menu Name="businessMenu" Height="22" Canvas.Left="119" Canvas.Top="15" Width="518">
+            <MenuItem x:Name="UpdateItems" Header="_Update Items" Click="UpdateItems_Click"/>
             <MenuItem x:Name="Search" Header="_Search Invoice" Click="Search_Click"/>
         </Menu>
-        <Button Name="createBtn" Content="Create Invoice" Canvas.Left="60" Canvas.Top="67" Width="85" Click="createBtn_Click"/>
-        <Button Name="deleteBtn" Content="Delete Invoice" Canvas.Left="237" Canvas.Top="67" Width="101" Click="deleteBtn_Click"/>
-        <Button Name="editBtn" Content="Edit Invoice" Canvas.Left="415" Canvas.Top="67" Width="75" Click="editBtn_Click"/>
+        <Button Name="createBtn" Content="Create Invoice" Canvas.Left="119" Canvas.Top="83" Width="85" Click="createBtn_Click"/>
+        <Button Name="deleteBtn" Content="Delete Invoice" Canvas.Left="516" Canvas.Top="83" Width="101" Click="deleteBtn_Click"/>
+        <Button Name="editBtn" Content="Edit Invoice" Canvas.Left="326" Canvas.Top="83" Width="74" Click="editBtn_Click"/>
 
-        <Canvas Name="create" Height="270" Canvas.Left="49" Canvas.Top="140" Width="600" Visibility="Hidden">
-            <DataGrid Height="117" Canvas.Left="31" Canvas.Top="19" Width="533"/>
-            <DatePicker Canvas.Left="50" Canvas.Top="212"/>
+        <Canvas Name="itemsManager" Height="284" Canvas.Left="65" Canvas.Top="121" Width="572" Visibility="Visible">
+            <DataGrid Name="invoiceDG" Height="117" Canvas.Left="20" Canvas.Top="25" Width="532"/>
+            <DatePicker Name="selectedDate" Canvas.Left="50" Canvas.Top="245"/>
             <Label Content="View Item: " HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="31" Canvas.Top="150"/>
             <Label Content="Number of Items:" Canvas.Left="427" Canvas.Top="212"/>
             <Label Content="" Name="numItemsLbl" Canvas.Left="535" Canvas.Top="212"/>
             <Label Content="Total Cost:" Canvas.Left="466" Canvas.Top="186"/>
             <Label Content="" Name="costLbl" Canvas.Left="535" Canvas.Top="186"/>
             <Button Content="Add Item" Name="addItemBtn" Canvas.Left="359" Canvas.Top="153" Width="76" Click="addItemBtn_Click"/>
-            <Button Name="cancelInvoiceBtn" Content="Cancel Invoice" Canvas.Left="50" Canvas.Top="247" Width="84" Click="cancelInvoiceBtn_Click"/>
-            <ComboBox Name="itemList" Canvas.Left="100" Canvas.Top="153" Width="120"/>
-            <Button Name="SaveInvoice" Content="Save Invoice" Canvas.Left="466" Canvas.Top="247" Width="84" Click="SaveInvoice_Click"/>
+            <ComboBox Name="cbitemList" Canvas.Left="100" Canvas.Top="153" Width="120" SelectionChanged="cbitemList_SelectionChanged"/>
+            <Button Name="SaveInvoice" Content="Save Invoice" Canvas.Left="227" Canvas.Top="245" Width="84" Click="SaveInvoice_Click"/>
             <TextBox Name="itemCost" Height="23" Canvas.Left="238" TextWrapping="Wrap" Text="" Canvas.Top="153" Width="62" IsReadOnly="True"/>
-            <Button Content="Delete Item" Canvas.Left="455" Canvas.Top="153" Width="75"/>
+            <Button Name="DeleteBtn" Content="Delete Item" Canvas.Left="455" Canvas.Top="153" Width="75" Click="DeleteBtn_Click"/>
+            <TextBlock Name="itemDesc" Canvas.Left="50" TextWrapping="Wrap" Text="" Canvas.Top="199"/>
         </Canvas>
-
-
-        <Canvas Name="edit" Height="305" Canvas.Left="49" Canvas.Top="105" Width="600" Visibility="Visible">
-            <DataGrid Height="117" Canvas.Left="31" Canvas.Top="41" Width="533"/>
-            <DatePicker Canvas.Left="50" Canvas.Top="238"/>
-            <Label Content="View Item: " HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="31" Canvas.Top="171"/>
-            <Label Content="Number of Items:" Canvas.Left="428" Canvas.Top="235"/>
-            <Label Content="" Name="EdNumItemsLbl" Canvas.Left="535" Canvas.Top="235"/>
-            <Label Content="Total Cost:" Canvas.Left="466" Canvas.Top="205"/>
-            <Label Content="" Name="EdCostLbl" Canvas.Left="535" Canvas.Top="205"/>
-            <Button Content="Add Item" Name="EdAddItemBtn" Canvas.Left="359" Canvas.Top="171" Width="76" Click="EdAddItemBtn_Click"/>
-            <Button Name="EdcancelInvoiceBtn" Content="Cancel Invoice" Canvas.Left="50" Canvas.Top="276" Width="84" Click="cancelInvoiceBtn_Click"/>
-            <ComboBox Name="EditemList" Canvas.Left="100" Canvas.Top="172" Width="120"/>
-            <Button Name="EdSaveInvoice" Content="Save Invoice" Canvas.Left="466" Canvas.Top="276" Width="84" Click="EdSaveInvoice_Click"/>
-            <TextBox Name="EdItemCost" Height="23" Canvas.Left="238" TextWrapping="Wrap" Text="" Canvas.Top="171" Width="62" IsReadOnly="True"/>
-            <Button Name="EdDelItem" Content="Delete Item" Canvas.Left="455" Canvas.Top="171" Width="75"/>
-            <Label Content="Select Invoice:" Canvas.Left="31" Canvas.Top="10"/>
-            <ComboBox Name="InvoiceList" Canvas.Left="121" Canvas.Top="10" Width="120"/>
-        </Canvas>
-
-        <Canvas Name="deleteUI" Height="236" Canvas.Left="60" Canvas.Top="140" Width="463" Visibility="Hidden">
-            <DataGrid Height="103" Canvas.Left="10" Canvas.Top="10" Width="443"/>
-            <Label Content="View Invoice:" Canvas.Left="20" Canvas.Top="125"/>
-            <ComboBox Name="InvoicesCmbBox" Canvas.Left="103" Canvas.Top="128" Width="120"/>
-            <Label Content="" Name="totalCostLbl" Canvas.Left="414" Canvas.Top="125"/>
-            <Button Name="cancelDelBtn" Content="Cancel" Canvas.Left="23" Canvas.Top="185" Width="75"/>
-            <Button Name="delDelBtn" Content="Delete" Canvas.Left="349" Canvas.Top="185" Width="75" Click="delDelBtn_Click"/>
-            <Label Content="" Name="numItemLbl" Canvas.Left="405" Canvas.Top="150"/>
-            <Label Content="Total Cost:" Canvas.Left="331" Canvas.Top="125"/>
-            <Label Content="Number of Items:" Canvas.Left="302" Canvas.Top="150"/>
-        </Canvas>
+        <Label Name="emptyLbl" Content="" Canvas.Left="219" Canvas.Top="37" Foreground="Red"/>
+        <Label Content="Invoice Number:" Canvas.Left="89" Canvas.Top="108"/>
+        <Label Name="invoiceLbl" Content="" Canvas.Left="191" Canvas.Top="108"/>
     </Canvas>
 </Window>
