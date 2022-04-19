@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.Data;
 using System.Windows.Data;
 using System.Windows.Navigation;
+using System.Reflection;
 
 namespace GroupProjectPrototype
 {
@@ -40,31 +41,25 @@ namespace GroupProjectPrototype
             newItem = new clsItemsLogic();
             InitializeComponent();
 
+            btnSelectItem.IsEnabled = false;
+            btnDeleteItem.IsEnabled = false;
+            btnSaveEdit.IsEnabled = false;
+
             cmbItemList.ItemsSource = clsBigBoxOfScaryThings.GetBusinessItems();
             itemsGrid.ItemsSource = clsBigBoxOfScaryThings.GetBusinessItems();
         }
 
-        private void mainButton_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// cancels and closes the items window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
-            // Create the wndMain variable.
-            MainWindow wndMain = new MainWindow();
-
-            // Go to the wndMain page.
-            this.Hide();
-            wndMain.ShowDialog();
-            this.Show();
+            //close the window
+            this.Close();
         }
 
-        private void searchButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Create the wndSearch variable.
-            SearchWindow wndSearch = new SearchWindow();
-
-            // Go to the wndSearch page.
-            this.Hide();
-            wndSearch.ShowDialog();
-            this.Show();
-        }
 
         /// <summary>
         /// adds item to database and updates datagrid
@@ -77,15 +72,15 @@ namespace GroupProjectPrototype
                 if (txtNewItemCost.Text != "" && txtNewItemName.Text != "" && txtNewItemDes.Text != "")
                 {
                     newItem.addNewItem(txtNewItemName.Text, txtNewItemDes.Text, Convert.ToDouble(txtNewItemCost.Text));
-                }
-                else
-                {
-                    //error
+                    cmbItemList.ItemsSource = clsBigBoxOfScaryThings.GetBusinessItems();
+                    itemsGrid.ItemsSource = clsBigBoxOfScaryThings.GetBusinessItems();
                 }
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                System.IO.File.AppendAllText(@"C:\Error.txt", Environment.NewLine + "HandleError Exception: " + ex.Message);
+                // Handle the error in top level method calls.
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                    MethodInfo.GetCurrentMethod().Name, ex.Message);
             }
         }
 
@@ -98,11 +93,17 @@ namespace GroupProjectPrototype
         {
             try
             {
-
+                ItemID = Convert.ToInt32(((clsBusinessItem)cmbItemList.SelectedItem).ItemID);
+                editItem = new clsItemsLogic(ItemID);
+                txtItemName.Text = editItem.getItemName();
+                txtCost.Text = editItem.getCost().ToString();
+                txtDescription.Text = editItem.getDescription();
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                System.IO.File.AppendAllText(@"C:\Error.txt", Environment.NewLine + "HandleError Exception: " + ex.Message);
+                // Handle the error in top level method calls.
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                    MethodInfo.GetCurrentMethod().Name, ex.Message);
             }
         }
 
@@ -115,11 +116,17 @@ namespace GroupProjectPrototype
         {
             try
             {
+                //editItem = new clsItemsLogic(ItemID);
+                editItem.deleteItem();
 
+                cmbItemList.ItemsSource = clsBigBoxOfScaryThings.GetBusinessItems();
+                itemsGrid.ItemsSource = clsBigBoxOfScaryThings.GetBusinessItems();
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                System.IO.File.AppendAllText(@"C:\Error.txt", Environment.NewLine + "HandleError Exception: " + ex.Message);
+                // Handle the error in top level method calls.
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                    MethodInfo.GetCurrentMethod().Name, ex.Message);
             }
         }
 
@@ -132,7 +139,40 @@ namespace GroupProjectPrototype
         {
             try
             {
+                //change the stuff
+                editItem.changePrice(Convert.ToDouble(txtCost.Text));
+                editItem.changeDescription(txtDescription.Text);
+                editItem.changeName(txtItemName.Text);
 
+                //clear the textboxes
+                txtCost.Text = "";
+                txtDescription.Text = "";
+                txtItemName.Text = "";
+
+                //update the lists
+                cmbItemList.ItemsSource = clsBigBoxOfScaryThings.GetBusinessItems();
+                itemsGrid.ItemsSource = clsBigBoxOfScaryThings.GetBusinessItems();
+
+            }
+            catch (Exception ex)
+            {
+                // Handle the error in top level method calls.
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                    MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Exception Handling
+        /// </summary>
+        /// <param name="sClass"></param>
+        /// <param name="sMethod"></param>
+        /// <param name="sMessage"></param>
+        private void HandleError(string sClass, string sMethod, string sMessage)
+        {
+            try
+            {
+                MessageBox.Show(sClass + "." + sMethod + " -> " + sMessage);
             }
             catch (System.Exception ex)
             {
@@ -145,6 +185,30 @@ namespace GroupProjectPrototype
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-
+        private void cmbItemList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                if (cmbItemList is null)
+                {
+                    btnSaveEdit.IsEnabled = false;
+                    btnSelectItem.IsEnabled = false;
+                    btnDeleteItem.IsEnabled = false;
+                }
+                else
+                {
+                    btnSaveEdit.IsEnabled = true;
+                    btnSelectItem.IsEnabled = true;
+                    btnDeleteItem.IsEnabled = true;
+                }
+                    
+            }
+            catch (Exception ex)
+            {
+                // Handle the error in top level method calls.
+                HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                    MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
     }
 }

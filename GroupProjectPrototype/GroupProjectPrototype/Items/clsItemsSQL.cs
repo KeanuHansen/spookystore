@@ -101,7 +101,7 @@ namespace GroupProjectPrototype.Search
         {
             try
             {
-                string delete = "DELETE FROM Items WHERE Item_ID LIKE " + itemID;
+                string delete = "DELETE FROM Items WHERE Item_ID = " + itemID;
                 return delete;
             }
             catch (Exception ex)
@@ -123,7 +123,7 @@ namespace GroupProjectPrototype.Search
             try
             {
 
-                string addingItem = "INSERT INTO Items VALUES ('" + name + "', " + cost + ", '" + description + "')";
+                string addingItem = "INSERT INTO Items (Item_Name, Item_Description, Cost) VALUES ('" + name + "', '" + description + "', " + cost + ")";
                 return addingItem;
             }
             catch (Exception ex)
@@ -141,7 +141,7 @@ namespace GroupProjectPrototype.Search
         {
             try
             {
-                string check = "SELECT * FROM Invoice_Item_Relation WHERE Item_ID LIKE " + itemID;
+                string check = "SELECT * FROM Invoice_Item_Relation WHERE Item_ID = " + itemID;
                 return check;
             }
             catch (Exception ex)
@@ -160,6 +160,79 @@ namespace GroupProjectPrototype.Search
             try
             {
                 string sql = "SELECT * FROM Items";
+                return sql;
+            }
+            catch (Exception ex)
+            {
+                // Calling methods need to throw the exception with meaningful information.
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// returns sql statement to make sure we are not adding an item that we already have
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public string checkDoubleItem(string name)
+        {
+            try
+            {
+                string sql = "SELECT * FROM Items WHERE Item_Name LIKE '" + name + "'";
+                return sql;
+            }
+            catch (Exception ex)
+            {
+                // Calling methods need to throw the exception with meaningful information.
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// returns a sql statement that gets the item name
+        /// </summary>
+        /// <returns></returns>
+        public string getItemName()
+        {
+            try
+            {
+                string sql = "SELECT Item_Name FROM Items WHERE Item_ID = " + this.itemID;
+                return sql;
+            }
+            catch (Exception ex)
+            {
+                // Calling methods need to throw the exception with meaningful information.
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// returns a sql statements that get the items cost
+        /// </summary>
+        /// <returns></returns>
+        public string getItemCost()
+        {
+            try
+            {
+                string sql = "SELECT Cost FROM Items WHERE Item_ID = " + this.itemID;
+                return sql;
+            }
+            catch (Exception ex)
+            {
+                // Calling methods need to throw the exception with meaningful information.
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// returns a sql statement that gets the items description
+        /// </summary>
+        /// <returns></returns>
+        public string getItemDes()
+        {
+            try
+            {
+                string sql = "SELECT Item_Description FROM Items WHERE Item_ID = " + this.itemID;
                 return sql;
             }
             catch (Exception ex)
