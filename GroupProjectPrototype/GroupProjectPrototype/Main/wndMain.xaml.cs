@@ -223,13 +223,13 @@ namespace GroupProjectPrototype
         {
             try
             {
-                // Delete the items list
-                bList.Clear();
-
                 // Call function to delete the invoice
                 mLogic.deleteInvoice(bList, invoiceLbl.Content.ToString());
 
-                // Change to false since save invoice intiallay turned this to true
+                // Delete the items list
+                bList.Clear();
+
+                // Change to false since save invoice initiallay turned this to true
                 isEdit = false;
 
                 // Refresh the datagrid
@@ -243,7 +243,8 @@ namespace GroupProjectPrototype
                 // "Reset" Date and Textbox
                 itemCost.Text = "";
                 itemDesc.Text = "";
-                //selectedDate = DateTime.Now;
+
+                // Make sure the combobox is not selecting anything
                 cbitemList.SelectedItem = null;
 
                 // Reset the totals
@@ -278,6 +279,9 @@ namespace GroupProjectPrototype
 
                 // Create a new items window object
                 wndUpdateItems = new EditWindow();
+
+                // Display the window
+                wndUpdateItems.ShowDialog();
 
                 // Update the combobox
                 cbitemList.ItemsSource = clsBigBoxOfScaryThings.GetBusinessItems();
@@ -544,7 +548,7 @@ namespace GroupProjectPrototype
                 if (!isEdit)
                 {
                     /* User Saved the invoice for the first time */
-                    //mLogic.addInvoice(bList, Convert.ToString(totalCost), sDate);
+                    mLogic.addInvoice(bList, Convert.ToString(totalCost), sDate);
 
                     // Retrieve the ID main logic class
                     invoiceID = mLogic.invoiceID;
@@ -570,19 +574,17 @@ namespace GroupProjectPrototype
                         return;
                     }
 
-
                     // The user is on edit mode
                     UIhandler(true, false, true, false, false);
-
 
                     // Check  if there were any changes
                     // If not, Update the database
                     if ((totalCost != copyTotalCost) || (numItems != copyNumItems))
                     {
                         // Update the database
-                        //isEdit = false; ////// DELETE THIS!!!
+                        mLogic.updateInvoice(bList, Convert.ToString(copyTotalCost), sDate, Convert.ToString(invoiceLbl.Content));
                     }
-                    ////////////////////////////////////////////////////
+
                     // Clear out labels
                     invoiceLbl.Content = "";
                     costLbl.Content = "";

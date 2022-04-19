@@ -176,9 +176,9 @@ namespace GroupProjectPrototype.Main
                 // Loop through each item in list
                 foreach(clsBusinessItem item in itemsList)
                 {
-                    sql += "(";
-                    sql += "'" + item.ItemID + "', '" + invoiceID + "'";
-                    sql += "), ";
+                    sql += "('";
+                    sql += item.ItemID + "', '" + invoiceID;
+                    sql += "'), ";
                 }
 
 
@@ -238,6 +238,7 @@ namespace GroupProjectPrototype.Main
         }
         #endregion
 
+        #region Update Invoice
         /// <summary>
         /// Updates date and total cost based on invoice
         /// </summary>
@@ -256,6 +257,7 @@ namespace GroupProjectPrototype.Main
                     MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
         }
+        #endregion
 
     } // end of class
 }

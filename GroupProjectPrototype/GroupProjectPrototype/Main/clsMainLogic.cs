@@ -87,7 +87,6 @@ namespace GroupProjectPrototype
 
                 // Deletes invoice from Invoices table
                 db.ExecuteNonQuery(sSQL.delInvoice(ID));
-
             } 
             catch (Exception ex)
             {
@@ -124,6 +123,7 @@ namespace GroupProjectPrototype
         }
         #endregion
 
+        #region Update Invoice
         /// <summary>
         /// Updates Selected invoice based on invoice ID
         /// </summary>
@@ -147,7 +147,7 @@ namespace GroupProjectPrototype
                     MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
         }
-
+        #endregion
 
     } // end of class
 }
