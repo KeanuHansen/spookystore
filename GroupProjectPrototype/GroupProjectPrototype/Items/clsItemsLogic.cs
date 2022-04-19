@@ -32,9 +32,26 @@ namespace GroupProjectPrototype
         /// </summary>
         DataSet ds;
 
+        /// <summary>
+        /// constructor for adding new item to database
+        /// </summary>
+        public clsItemsLogic()
+        {
+            try
+            {
+                itemSQL = new clsItemsSQL(this.ItemID);
+                itemManage = new clsDataAccess();
+                ds = new DataSet();
+            }
+            catch (Exception ex)
+            {
+                // Calling methods need to throw the exception with meaningful information.
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
 
         /// <summary>
-        /// recieves the invoiceID from the main window when edit is selected
+        /// recieves the itemID from the item window 
         /// </summary>
         /// <param name="invoiceID"></param>
         public clsItemsLogic(int ItemID)
@@ -42,7 +59,7 @@ namespace GroupProjectPrototype
             try
             {
                 this.ItemID = ItemID;
-                itemSQL = new clsItemsSQL();
+                itemSQL = new clsItemsSQL(this.ItemID);
                 itemManage = new clsDataAccess();
                 ds = new DataSet();
             }
@@ -134,5 +151,6 @@ namespace GroupProjectPrototype
                 throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
         }
+
     }
 }

@@ -22,9 +22,26 @@ namespace GroupProjectPrototype
     /// </summary>
     public partial class EditWindow : Window
     {
+
+        /// <summary>
+        /// object for adding new item
+        /// </summary>
+        clsItemsLogic newItem; 
+
+        /// <summary>
+        /// object for editing an item
+        /// </summary>
+        clsItemsLogic editItem;
+
+        int ItemID;
+        
         public EditWindow()
         {
+            newItem = new clsItemsLogic();
             InitializeComponent();
+
+            cmbItemList.ItemsSource = clsBigBoxOfScaryThings.GetBusinessItems();
+            itemsGrid.ItemsSource = clsBigBoxOfScaryThings.GetBusinessItems();
         }
 
         private void mainButton_Click(object sender, RoutedEventArgs e)
@@ -54,8 +71,22 @@ namespace GroupProjectPrototype
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnAddItem_Click(object sender, RoutedEventArgs e) { 
-
+        private void btnAddItem_Click(object sender, RoutedEventArgs e) {
+            try
+            {
+                if (txtNewItemCost.Text != "" && txtNewItemName.Text != "" && txtNewItemDes.Text != "")
+                {
+                    newItem.addNewItem(txtNewItemName.Text, txtNewItemDes.Text, Convert.ToDouble(txtNewItemCost.Text));
+                }
+                else
+                {
+                    //error
+                }
+            }
+            catch (System.Exception ex)
+            {
+                System.IO.File.AppendAllText(@"C:\Error.txt", Environment.NewLine + "HandleError Exception: " + ex.Message);
+            }
         }
 
         /// <summary>
@@ -65,7 +96,14 @@ namespace GroupProjectPrototype
         /// <param name="e"></param>
         private void btnSelectItem_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
 
+            }
+            catch (System.Exception ex)
+            {
+                System.IO.File.AppendAllText(@"C:\Error.txt", Environment.NewLine + "HandleError Exception: " + ex.Message);
+            }
         }
 
         /// <summary>
@@ -75,7 +113,14 @@ namespace GroupProjectPrototype
         /// <param name="e"></param>
         private void btnDeleteItem_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
 
+            }
+            catch (System.Exception ex)
+            {
+                System.IO.File.AppendAllText(@"C:\Error.txt", Environment.NewLine + "HandleError Exception: " + ex.Message);
+            }
         }
 
         /// <summary>
@@ -85,7 +130,21 @@ namespace GroupProjectPrototype
         /// <param name="e"></param>
         private void btnSaveEdit_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
 
+            }
+            catch (System.Exception ex)
+            {
+                System.IO.File.AppendAllText(@"C:\Error.txt", Environment.NewLine + "HandleError Exception: " + ex.Message);
+            }
         }
+
+        /// <summary>
+        /// for when the selected item in the combobox is changed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
     }
 }

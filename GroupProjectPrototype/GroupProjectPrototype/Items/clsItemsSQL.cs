@@ -13,56 +13,39 @@ namespace GroupProjectPrototype.Search
         /// <summary>
         /// Item Manager object that holds the database variable
         /// </summary>
-        clsDataAccess db = new clsDataAccess();
+        clsDataAccess db;
+        DataSet ds;
 
-        /// <summary>
-        /// holds the id of the item we are looking at.
-        /// </summary>
         int itemID;
 
         /// <summary>
-        /// constructor for when we are only adding an item.
+        /// constructor for adding an item
         /// </summary>
         public clsItemsSQL()
         {
-            try
-            {
-                ///we just need this to be able to add a new item.
-            }
-            catch (Exception ex)
-            {
-                // Calling methods need to throw the exception with meaningful information.
-                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
-            }
+            ds = new DataSet();
+            db = new clsDataAccess();
         }
 
         /// <summary>
-        /// constructor for when we are editing or deleting or checking invoices for a specified item.
+        /// constructor for editing and item
         /// </summary>
-        /// <param name="itemID"></param>
         public clsItemsSQL(int itemID)
         {
-            try
-            {
-                this.itemID = itemID;
-            }
-            catch (Exception ex)
-            {
-                // Calling methods need to throw the exception with meaningful information.
-                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
-            }
+            this.itemID = itemID;
+            db = new clsDataAccess();
+            ds = new DataSet();
         }
 
-
         /// <summary>
-        /// takes in a number then sets the current items cost to that number
+        /// returns sql statement to update the cost of an item.
         /// </summary>
         /// <param name="newCost"></param>
         public string editCost(double newCost)
         {
             try
             {
-                string updateCost = "UPDATE Items SET Cost = " + newCost + "WHERE Item_ID LIKE " + itemID;
+                string updateCost = "UPDATE Items SET Cost = " + newCost + "WHERE Item_ID = " + itemID;
                 return updateCost;
             }
             catch (Exception ex)
@@ -160,6 +143,24 @@ namespace GroupProjectPrototype.Search
             {
                 string check = "SELECT * FROM Invoice_Item_Relation WHERE Item_ID LIKE " + itemID;
                 return check;
+            }
+            catch (Exception ex)
+            {
+                // Calling methods need to throw the exception with meaningful information.
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// returns a sql statement to get info on all items in database
+        /// </summary>
+        /// <returns></returns>
+        public string getItemsInfo()
+        {
+            try
+            {
+                string sql = "SELECT * FROM Items";
+                return sql;
             }
             catch (Exception ex)
             {
