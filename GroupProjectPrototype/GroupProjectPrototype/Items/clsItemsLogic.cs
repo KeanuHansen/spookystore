@@ -85,7 +85,7 @@ namespace GroupProjectPrototype
                 int rows = 0;
                 ds = itemManage.ExecuteSQLStatement(itemSQL.checkInvoices(), ref rows);
 
-                if(rows == 0 || rows == null) //if true, then that means this item isnt on any invoices, then it can be deleted
+                if(rows == 0) //if true, then that means this item isnt on any invoices, then it can be deleted
                 {
                     itemManage.ExecuteNonQuery(itemSQL.deleteItem()); //deletes the item.
                 }

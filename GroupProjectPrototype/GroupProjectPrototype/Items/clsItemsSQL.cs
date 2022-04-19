@@ -123,7 +123,7 @@ namespace GroupProjectPrototype.Search
             try
             {
 
-                string addingItem = "INSERT INTO Items VALUES (" + name + ", " + cost + ", " + description + ")";
+                string addingItem = "INSERT INTO Items VALUES ('" + name + "', " + cost + ", '" + description + "')";
                 return addingItem;
             }
             catch (Exception ex)
