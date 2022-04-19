@@ -64,22 +64,40 @@ namespace GroupProjectPrototype.Search
         /// <summary>
         /// Gets the Invoice ID's for the main page
         /// </summary>
+        /// <returns>String with the query</returns>
         public string GetInvoiceID
         {
             get
             {
-                return "SELECT DISTINCT Invoice_ID FROM Invoices ";
+                try
+                {
+                    return "SELECT DISTINCT Invoice_ID FROM Invoices ";
+                }
+                catch (Exception ex)
+                {
+                    // Calling methods need to throw the exception with meaningful information.
+                    throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+                }
             }
         }
 
         /// <summary>
         /// Gets the Total Charges for the main page
         /// </summary>
+        /// <returns>String with the query</returns>
         public string GetTotalCharge
         {
             get
             {
-                return "SELECT DISTINCT Total_Cost FROM Invoices ORDER BY Total_Cost ASC ";
+                try
+                {
+                    return "SELECT DISTINCT Total_Cost FROM Invoices ORDER BY Total_Cost ASC ";
+                }
+                catch (Exception ex)
+                {
+                    // Calling methods need to throw the exception with meaningful information.
+                    throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+                }
             }
         }
     }
